@@ -7,6 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Firebase App & Auth SDK (v10 Modular via Compat or ES Module) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <style>
     :root {
       --bg-dark: #08090D;
@@ -136,9 +140,110 @@
       50% { opacity: 0.4; transform: scale(0.8); }
     }
 
-    .header-actions {
+    .user-profile-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+    }
+    .user-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #4F46E5;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #FFF;
+      font-size: 13px;
+    }
+
+    /* Auth Gate Overlay */
+    .auth-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 13, 0.95);
+      backdrop-filter: blur(24px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .auth-overlay.hidden {
+      display: none;
+    }
+    .auth-card {
+      background: rgba(18, 20, 29, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 440px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    }
+    .auth-card .lock-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #6366F1, #10B981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 20px;
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+    .auth-card h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .auth-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+    .btn-google {
+      width: 100%;
+      background: #FFF;
+      color: #1F2937;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+    .btn-google:hover {
+      background: #F3F4F6;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+    }
+    .auth-denied {
+      display: none;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #FCA5A5;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      margin-top: 16px;
+      text-align: left;
     }
 
     .btn {
@@ -729,6 +834,11 @@
       </div>
 
       <div class="header-actions">
+        <div class="user-profile-badge" id="userProfileBadge" style="display: none;">
+          <div class="user-avatar" id="userAvatar">A</div>
+          <span id="userEmailDisplay" style="color: #E5E7EB; font-weight: 500;">contact.adityaharsh@gmail.com</span>
+          <button class="status-badge-btn" id="btnSignOut" style="padding: 3px 8px; margin-left: 4px;">Log Out</button>
+        </div>
         <button class="btn btn-secondary" id="btnExportCsv">
           📥 Export CSV
         </button>
@@ -737,6 +847,33 @@
         </button>
       </div>
     </header>
+
+    <!-- Auth Gate Overlay -->
+    <div class="auth-overlay" id="authGate">
+      <div class="auth-card">
+        <div class="lock-icon">🔒</div>
+        <h2>Sentinel Security Gate</h2>
+        <p>Restricted growth intelligence system. Please sign in with your authorized Google Account (<code>contact.adityaharsh@gmail.com</code>) to access.</p>
+        
+        <button class="btn-google" id="btnGoogleSignIn">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          Sign In with Google
+        </button>
+
+        <div class="auth-denied" id="authDenied">
+          <strong>⚠️ Access Denied</strong><br>
+          <span id="deniedEmailText">Your account is not authorized to access this sentinel.</span>
+          <button class="btn btn-secondary" style="margin-top: 10px; width: 100%; justify-content: center;" id="btnDeniedSignOut">
+            Sign Out & Switch Account
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- Stats Overview -->
     <div class="stats-grid">
@@ -832,16 +969,89 @@
   </div>
 
   <script>
+    // Firebase Web SDK Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDnAJlhRxCVA58CDehVuz6bWrMJJpFSiuY",
+      authDomain: "gen-lang-client-0758786889.firebaseapp.com",
+      projectId: "gen-lang-client-0758786889",
+      storageBucket: "gen-lang-client-0758786889.firebasestorage.app",
+      messagingSenderId: "339694963546",
+      appId: "1:339694963546:web:1e2110425c7c814d5f8163"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+    const auth = firebase.auth();
+
+    const AUTHORIZED_EMAILS = [
+      'contact.adityaharsh@gmail.com',
+      'aditya110197@gmail.com'
+    ];
+
+    let currentUser = null;
     let currentProject = 'hashlilly';
     let currentScore = 80;
     let currentStatus = 'all';
     let searchQuery = '';
     let leadsData = [];
 
+    function setupAuth() {
+      const authGate = document.getElementById('authGate');
+      const authDenied = document.getElementById('authDenied');
+      const btnSignIn = document.getElementById('btnGoogleSignIn');
+      const profileBadge = document.getElementById('userProfileBadge');
+      const userAvatar = document.getElementById('userAvatar');
+      const userEmailDisplay = document.getElementById('userEmailDisplay');
+      const deniedText = document.getElementById('deniedEmailText');
+
+      // Google Sign In
+      btnSignIn.addEventListener('click', async () => {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        try {
+          await auth.signInWithPopup(provider);
+        } catch (err) {
+          alert('Sign in failed: ' + err.message);
+        }
+      });
+
+      // Sign Out
+      document.getElementById('btnSignOut').addEventListener('click', () => auth.signOut());
+      document.getElementById('btnDeniedSignOut').addEventListener('click', () => auth.signOut());
+
+      // Auth Listener
+      auth.onAuthStateChanged(user => {
+        currentUser = user;
+        if (!user) {
+          authGate.classList.remove('hidden');
+          authDenied.style.display = 'none';
+          btnSignIn.style.display = 'flex';
+          profileBadge.style.display = 'none';
+        } else {
+          const email = (user.email || '').toLowerCase();
+          if (AUTHORIZED_EMAILS.includes(email)) {
+            // Authorized
+            authGate.classList.add('hidden');
+            profileBadge.style.display = 'inline-flex';
+            userEmailDisplay.innerText = email;
+            userAvatar.innerText = (user.displayName || email)[0].toUpperCase();
+            fetchStats();
+            fetchLeads();
+          } else {
+            // Unauthorized
+            authGate.classList.remove('hidden');
+            btnSignIn.style.display = 'none';
+            authDenied.style.display = 'block';
+            deniedText.innerText = `Signed in as ${email}. This account does not have access permissions.`;
+            profileBadge.style.display = 'none';
+          }
+        }
+      });
+    }
+
     async function init() {
+      setupAuth();
       setupEventListeners();
-      await fetchStats();
-      await fetchLeads();
     }
 
     function setupEventListeners() {
