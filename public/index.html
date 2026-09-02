@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reddit Growth & Lead Sentinel | Studio Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #08090D;
+      --bg-card: rgba(18, 20, 29, 0.75);
+      --bg-card-hover: rgba(24, 27, 40, 0.9);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-glow: rgba(99, 102, 241, 0.3);
+      --accent-primary: #6366F1;
+      --accent-emerald: #10B981;
+      --accent-pink: #EC4899;
+      --accent-cyan: #06B6D4;
+      --accent-amber: #F59E0B;
+      --text-main: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --text-dim: #6B7280;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 15% 15%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+        radial-gradient(at 85% 85%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(236, 72, 153, 0.05) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-main);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #252836;
+      border-radius: 4px;
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 32px 60px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+      margin-bottom: 28px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #6366F1, #10B981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-title span {
+      background: linear-gradient(90deg, #A5B4FC, #6EE7B7);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10B981;
+      box-shadow: 0 0 10px #10B981;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      outline: none;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #4F46E5, #059669);
+      color: #FFF;
+      box-shadow: 0 4px 16px rgba(79, 70, 229, 0.35);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(79, 70, 229, 0.5);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Stats Banner */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-info .stat-label {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .stat-info .stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFF;
+    }
+
+    .stat-icon {
+      font-size: 26px;
+      opacity: 0.85;
+    }
+
+    /* Filter Toolbar */
+    .toolbar-section {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 18px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .project-tabs {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFF;
+    }
+    .tab-btn.active {
+      background: rgba(99, 102, 241, 0.15);
+      border-color: #6366F1;
+      color: #A5B4FC;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.2);
+    }
+    .tab-btn.hashlilly-tab.active {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10B981;
+      color: #6EE7B7;
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
+    }
+
+    .filter-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      padding: 10px 16px 10px 38px;
+      border-radius: 10px;
+      color: #FFF;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-box input:focus {
+      border-color: var(--accent-primary);
+    }
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+    }
+
+    .select-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    select {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      outline: none;
+      cursor: pointer;
+    }
+    select:focus {
+      border-color: var(--accent-primary);
+    }
+
+    /* Leads Feed */
+    .leads-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .leads-count-text {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .leads-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .lead-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+    .lead-card:hover {
+      border-color: rgba(99, 102, 241, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+    .lead-card.high-intent {
+      border-left: 4px solid #10B981;
+    }
+
+    .lead-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+      gap: 16px;
+    }
+
+    .lead-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge-project {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(99, 102, 241, 0.15);
+      color: #A5B4FC;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    .badge-project.hashlilly {
+      background: rgba(16, 185, 129, 0.15);
+      color: #6EE7B7;
+      border-color: rgba(16, 185, 129, 0.3);
+    }
+    .badge-project.thatsmissing {
+      background: rgba(99, 102, 241, 0.15);
+      color: #A5B4FC;
+      border-color: rgba(99, 102, 241, 0.3);
+    }
+    .badge-project.soulamore {
+      background: rgba(236, 72, 153, 0.15);
+      color: #F472B6;
+      border-color: rgba(236, 72, 153, 0.3);
+    }
+    .badge-project.ayuos {
+      background: rgba(6, 182, 212, 0.15);
+      color: #67E8F9;
+      border-color: rgba(6, 182, 212, 0.3);
+    }
+
+    .badge-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: #F97316;
+      background: rgba(249, 115, 22, 0.1);
+      padding: 3px 10px;
+      border-radius: 8px;
+    }
+
+    .badge-author {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    .score-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 6px 14px;
+      border-radius: 12px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34D399;
+      white-space: nowrap;
+    }
+    .score-badge.amber {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+    }
+
+    .lead-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: #FFF;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .lead-body {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      max-height: 80px;
+      overflow: hidden;
+      position: relative;
+    }
+    .lead-body.expanded {
+      max-height: none;
+    }
+
+    .expand-toggle {
+      font-size: 12px;
+      color: #818CF8;
+      cursor: pointer;
+      margin-top: 4px;
+      display: inline-block;
+    }
+
+    /* Pain Point Highlight Box */
+    .painpoint-box {
+      background: rgba(0, 0, 0, 0.4);
+      border-left: 3px solid #6366F1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+    }
+    .painpoint-box .painpoint-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #A5B4FC;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .painpoint-box .painpoint-text {
+      font-size: 13.5px;
+      color: #E5E7EB;
+    }
+
+    /* Reply Strategy Box */
+    .reply-box {
+      background: rgba(15, 17, 26, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .reply-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .reply-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #34D399;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .tone-selector {
+      display: flex;
+      gap: 6px;
+    }
+
+    .tone-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .tone-btn:hover {
+      color: #FFF;
+    }
+
+    .reply-content {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      color: #D1D5DB;
+      white-space: pre-wrap;
+      line-height: 1.6;
+      background: rgba(0, 0, 0, 0.25);
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    /* Action Buttons Row */
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .action-group-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .action-group-right {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-copy-reddit {
+      background: linear-gradient(135deg, #10B981, #059669);
+      color: #FFF;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-copy-reddit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    .btn-open-reddit {
+      background: rgba(255, 69, 0, 0.15);
+      border: 1px solid rgba(255, 69, 0, 0.3);
+      color: #FF5722;
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .btn-open-reddit:hover {
+      background: rgba(255, 69, 0, 0.25);
+    }
+
+    .status-badge-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .status-badge-btn:hover {
+      color: #FFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .status-badge-btn.replied {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: #10B981;
+      color: #6EE7B7;
+    }
+    .status-badge-btn.bookmarked {
+      background: rgba(245, 158, 11, 0.15);
+      border-color: #F59E0B;
+      color: #FCD34D;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #10B981;
+      color: #FFF;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      z-index: 999;
+    }
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Scanning Modal / Spinner */
+    .scanning-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(8, 9, 13, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .scanning-overlay.active {
+      display: flex;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(99, 102, 241, 0.2);
+      border-top-color: #6366F1;
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-dim);
+    }
+    .empty-state h3 {
+      font-size: 18px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .app-container {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header>
+      <div class="brand-group">
+        <div class="brand-icon">⚡</div>
+        <div>
+          <h1 class="brand-title">
+            <span>Reddit Lead Sentinel</span>
+            <div class="badge-status">
+              <div class="pulse-dot"></div>
+              <span>Autonomous Mode</span>
+            </div>
+          </h1>
+          <p style="font-size: 13px; color: var(--text-dim); margin-top: 2px;">
+            AI Growth Agent for <strong>Hashlilly Resume Engine</strong>, That's Missing, Soulamore & AYUOS
+          </p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn btn-secondary" id="btnExportCsv">
+          📥 Export CSV
+        </button>
+        <button class="btn btn-primary" id="btnRunScan">
+          ⚡ Run Instant Scan
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Overview -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-info">
+          <div class="stat-label">Total Qualified Leads</div>
+          <div class="stat-value" id="statTotal">0</div>
+        </div>
+        <div class="stat-icon">🎯</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-info">
+          <div class="stat-label">🔥 High Intent (>80)</div>
+          <div class="stat-value" id="statHighIntent" style="color: #34D399;">0</div>
+        </div>
+        <div class="stat-icon">🔥</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-info">
+          <div class="stat-label">🌿 Hashlilly (Resume)</div>
+          <div class="stat-value" id="statHashlilly" style="color: #6EE7B7;">0</div>
+        </div>
+        <div class="stat-icon">📄</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-info">
+          <div class="stat-label">✉️ Replied / Engaged</div>
+          <div class="stat-value" id="statReplied" style="color: #A5B4FC;">0</div>
+        </div>
+        <div class="stat-icon">💬</div>
+      </div>
+    </div>
+
+    <!-- Filter Toolbar -->
+    <div class="toolbar-section">
+      <div class="project-tabs" id="projectTabs">
+        <button class="tab-btn active hashlilly-tab" data-project="hashlilly">🌿 Hashlilly (Resume Engine)</button>
+        <button class="tab-btn" data-project="thatsmissing">📊 That's Missing</button>
+        <button class="tab-btn" data-project="soulamore">🌸 Soulamore</button>
+        <button class="tab-btn" data-project="ayuos">🧬 AYUOS</button>
+        <button class="tab-btn" data-project="all">🌐 All Projects</button>
+      </div>
+
+      <div class="filter-controls">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search leads by title, pain point, subreddit, or author..." />
+        </div>
+
+        <div class="select-controls">
+          <select id="scoreFilter">
+            <option value="0">All Lead Scores</option>
+            <option value="70">Score ≥ 70</option>
+            <option value="80" selected>Score ≥ 80 (High Intent)</option>
+            <option value="90">Score ≥ 90 (Ultra Hot)</option>
+          </select>
+
+          <select id="statusFilter">
+            <option value="all">All Statuses</option>
+            <option value="new">🆕 New</option>
+            <option value="replied">✅ Replied</option>
+            <option value="bookmarked">📌 Bookmarked</option>
+            <option value="ignored">❌ Dismissed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Leads List -->
+    <div class="leads-header">
+      <h2 style="font-size: 18px; font-weight: 600;">Harvested Reddit Conversations</h2>
+      <div class="leads-count-text" id="leadCountDisplay">Showing 0 leads</div>
+    </div>
+
+    <div class="leads-list" id="leadsContainer">
+      <div class="empty-state">
+        <h3>Loading Reddit Lead Sentinel...</h3>
+        <p>Fetching latest high-intent leads and subreddits...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div id="toast">📋 Reply Copied! Opening Reddit Thread...</div>
+
+  <!-- Scanning Modal -->
+  <div class="scanning-overlay" id="scanningOverlay">
+    <div class="spinner"></div>
+    <h3 style="font-family: 'Outfit'; font-size: 20px; font-weight: 700;">Sentinel Scanning Reddit...</h3>
+    <p style="color: var(--text-muted); font-size: 14px;" id="scanningText">
+      Harvesting targeted subreddits & evaluating leads with AI...
+    </p>
+  </div>
+
+  <script>
+    let currentProject = 'hashlilly';
+    let currentScore = 80;
+    let currentStatus = 'all';
+    let searchQuery = '';
+    let leadsData = [];
+
+    async function init() {
+      setupEventListeners();
+      await fetchStats();
+      await fetchLeads();
+    }
+
+    function setupEventListeners() {
+      // Tabs
+      document.querySelectorAll('#projectTabs .tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#projectTabs .tab-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentProject = btn.getAttribute('data-project');
+          fetchLeads();
+        });
+      });
+
+      // Filters
+      document.getElementById('scoreFilter').addEventListener('change', (e) => {
+        currentScore = parseInt(e.target.value, 10);
+        fetchLeads();
+      });
+
+      document.getElementById('statusFilter').addEventListener('change', (e) => {
+        currentStatus = e.target.value;
+        fetchLeads();
+      });
+
+      let debounceTimer;
+      document.getElementById('searchInput').addEventListener('input', (e) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+          searchQuery = e.target.value.trim();
+          fetchLeads();
+        }, 300);
+      });
+
+      // Run Scan
+      document.getElementById('btnRunScan').addEventListener('click', async () => {
+        const overlay = document.getElementById('scanningOverlay');
+        const text = document.getElementById('scanningText');
+        overlay.classList.add('active');
+        text.innerText = `Scanning Reddit for ${currentProject === 'all' ? 'all projects' : currentProject.toUpperCase()}...`;
+
+        try {
+          const res = await fetch('/api/scan', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ projectId: currentProject === 'all' ? undefined : currentProject })
+          });
+          const result = await res.json();
+          overlay.classList.remove('active');
+
+          if (result.success) {
+            showToast(`Scan complete! Found ${result.newLeadsAdded} new high-intent leads.`);
+            await fetchStats();
+            await fetchLeads();
+          } else {
+            alert(result.message || 'Scan error');
+          }
+        } catch (err) {
+          overlay.classList.remove('active');
+          alert('Failed to execute scan: ' + err.message);
+        }
+      });
+
+      // Export CSV
+      document.getElementById('btnExportCsv').addEventListener('click', () => {
+        window.location.href = '/api/export/csv';
+      });
+    }
+
+    const FALLBACK_LEADS = [
+      {
+        "id": "lead_hl_resumes_001",
+        "redditPostId": "1g9x4q2",
+        "title": "Applied to 250+ Software Engineer jobs with 0 callbacks. Is my resume getting rejected by ATS? Please roast it.",
+        "selftext": "Hey everyone, I've been applying to mid-level and senior SWE roles since June. Over 250 applications, 0 interview callbacks, just automated rejection emails 24 hours later. I'm using a modern 2-column design template I made in Canva with skill progress bars and a nice header. Someone told me ATS parsers like Workday completely scramble multi-column layouts and can't read skill bars. Is that true? How can I fix this and optimize my bullet points?",
+        "author": "dev_career_throwaway",
+        "subreddit": "resumes",
+        "permalink": "https://www.reddit.com/r/resumes/comments/1g9x4q2/applied_to_250_jobs_with_0_callbacks/",
+        "createdUtc": 1725254400,
+        "redditScore": 142,
+        "numComments": 38,
+        "isLead": true,
+        "leadScore": 96,
+        "matchedProjectId": "hashlilly",
+        "matchedProjectName": "Hashlilly (Resume Engine & ATS Hub)",
+        "intentCategory": "Seeking ATS & Formatting Solution",
+        "urgency": "Critical",
+        "userPainPoint": "250+ applications with 0 callbacks due to a 2-column Canva template with skill bars that breaks ATS parsers (Workday/Greenhouse).",
+        "recommendedAction": "Reply to Thread with ATS formatting tips and free audit link",
+        "draftReply": "Hey u/dev_career_throwaway, yes—unfortunately, what you heard is 100% accurate.\n\nCanva and 2-column templates with graphical skill bars are the #1 reason qualified software engineers get auto-rejected by ATS screeners (Workday, Taleo, Greenhouse, Lever).\n\nHere is why and how to fix it immediately:\n1. **Single-Column Plain Text Layout**: ATS parsers read left-to-right, line-by-line. In a 2-column resume, it often reads line 1 of column A and line 1 of column B together, turning your job history into unreadable gibberish.\n2. **Delete Skill Progress Bars**: ATS parsers cannot evaluate graphic bars. Replace them with a simple **Technical Skills** section grouped cleanly (e.g. *Languages: TypeScript, Python, Go | Frameworks: React, Node.js, Next.js*).\n3. **Use the Google 'X-Y-Z' Formula for Bullets**: *'Accomplished [X], as measured by [Y], by doing [Z]'* (e.g., *'Reduced API response latency by 42% across 12 microservices by implementing Redis caching and indexing Postgres queries'*).\n4. **Keyword Alignment**: Ensure the exact keywords and libraries from the job description are explicitly mentioned in your experience.\n\nIf you want to see exactly how an ATS parses your text and test your ATS score against target job descriptions, you can run a free audit on **Hashlilly Resume Engine** (https://hashlilly.in).\n\nKeep your head up—switching to a clean ATS format will change your callback rate dramatically!",
+        "alternativeReplies": {
+          "founderCasual": "Hey! I built Hashlilly Resume Engine specifically to solve this. Scrap the 2-column Canva layout for a standard single-column format—ATS parsers get scrambled by columns. Quantify your engineering impact with metrics and you will start seeing callbacks.",
+          "actionableChecklist": "3 Quick Fixes:\n1. Switch to a 1-column layout immediately.\n2. Remove skill bars and use comma-separated tech lists.\n3. Run your resume through an ATS tester like Hashlilly Resume Engine (https://hashlilly.in) to verify parser output."
+        },
+        "keyTopics": ["ATS Parser Rejection", "2-Column Canva Template", "Workday ATS", "Technical Resume Optimization"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:15:00.000Z"
+      },
+      {
+        "id": "lead_hl_jobs_002",
+        "redditPostId": "1ga2m8k",
+        "title": "How do you tailor your resume for each job without spending 2 hours per application?",
+        "selftext": "Every piece of job advice says 'tailor your resume to the job description keywords'. But when you're applying to 10-15 jobs a week, rewording bullet points and finding matching keywords manually takes forever. Is there a tool or streamlined workflow that actually does this accurately without sounding like robotic word-salad?",
+        "author": "marketing_lead_24",
+        "subreddit": "jobs",
+        "permalink": "https://www.reddit.com/r/jobs/comments/1ga2m8k/how_do_you_tailor_your_resume_efficiently/",
+        "createdUtc": 1725250800,
+        "redditScore": 89,
+        "numComments": 24,
+        "isLead": true,
+        "leadScore": 92,
+        "matchedProjectId": "hashlilly",
+        "matchedProjectName": "Hashlilly (Resume Engine & ATS Hub)",
+        "intentCategory": "Seeking Tool / Workflow Automation",
+        "urgency": "High",
+        "userPainPoint": "Spending 2+ hours per application manually tailoring resume keywords and seeking an automated, authentic ATS tailoring tool.",
+        "recommendedAction": "Reply to Thread with fast tailoring workflow + tool recommendation",
+        "draftReply": "Hey u/marketing_lead_24, doing manual rewrites for every application will burn you out in a week.\n\nHere is a 5-minute repeatable workflow:\n1. **Create a 'Master Resume'**: Keep a 3-4 page master doc containing every project, metric, campaign, and responsibility you've ever had.\n2. **Target Only the Top 5 Hard Skills & Verbs**: Read the JD and highlight the top 3-5 recurring hard skills (e.g. *HubSpot, SQL, CAC optimization, lifecycle email*).\n3. **Swap Relevant Bullets**: Instead of rewriting from scratch, pull the 3-4 bullets from your Master doc that directly demonstrate those 5 skills.\n4. **Automate the Keyword Gap Analysis**: Use an ATS optimization tool that compares your resume text against the job description text to flag exact missing keywords and calculate match percentage.\n\nIf you want an automated tool that does this instantly without generating robotic fluff, check out **Hashlilly Resume Engine** (https://hashlilly.in). It highlights keyword gaps and formats clean ATS-compliant exports in seconds.",
+        "alternativeReplies": {
+          "founderCasual": "Tailoring manually takes too long. We built Hashlilly Resume Engine (https://hashlilly.in) to compare your resume directly against the job posting and tailor bullet points in seconds while preserving your voice.",
+          "actionableChecklist": "1. Maintain a Master Resume.\n2. Identify the top 5 JD keywords.\n3. Use Hashlilly Resume Engine to instantly scan for missing keywords."
+        },
+        "keyTopics": ["Resume Tailoring", "Job Description Match", "Keyword Optimization", "Hashlilly Resume Engine"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:20:00.000Z"
+      },
+      {
+        "id": "lead_tm_startups_003",
+        "redditPostId": "1gb7p1x",
+        "title": "How do you find genuine market gaps and validated problems before building a SaaS?",
+        "selftext": "I'm a developer looking to build a micro-SaaS. In the past, I built 2 products based on ideas in my own head, and both ended up with 0 users because nobody actually needed them. How do successful founders systematically identify real, burning consumer or B2B problems with high willingness-to-pay?",
+        "author": "solo_builder_99",
+        "subreddit": "startups",
+        "permalink": "https://www.reddit.com/r/startups/comments/1gb7p1x/how_to_find_validated_market_gaps/",
+        "createdUtc": 1725247200,
+        "redditScore": 115,
+        "numComments": 42,
+        "isLead": true,
+        "leadScore": 94,
+        "matchedProjectId": "thatsmissing",
+        "matchedProjectName": "That's Missing",
+        "intentCategory": "Market Validation & Idea Discovery",
+        "urgency": "High",
+        "userPainPoint": "Built 2 failed products with 0 users by guessing ideas; needs systematic market gap discovery and pain point validation.",
+        "recommendedAction": "Reply to Thread with problem-discovery framework + That's Missing scanner mention",
+        "draftReply": "Hey u/solo_builder_99, props for recognizing this early. Building in a vacuum is the #1 reason 90% of solo projects fail.\n\nHere is a systematic framework to find validated demand before writing a line of code:\n1. **Mine Software Complaints & 1-Star Reviews**: Don't look for ideas; look for active anger. Search Reddit, G2, and Capterra for phrases like *'why is [Competitor] so bloated'*, *'alternative to [Tool]'*, or *'is there any simple tool for [X]'*.\n2. **Look for Spreadsheets as MVPs**: If people are using messy Google Sheets or Notion hacks to manage a workflow, that is 100% proof of willingness-to-workaround.\n3. **Verify Willingness to Pay**: A problem isn't validated until people are already spending money or time trying to patch it.\n\nIf you want an automated stream of real market signals, unmet consumer demands, and analyzed software gaps, check out **That's Missing** (https://hashlilly.in/labs/thatsmissing). It runs autonomous sentinels across social platforms to extract structured startup opportunities.",
+        "alternativeReplies": {
+          "founderCasual": "The best approach is hunting for active user complaints on Reddit and forums. We built That's Missing (https://hashlilly.in/labs/thatsmissing) to continuously scan social feeds and extract validated market gaps automatically.",
+          "actionableChecklist": "1. Search for 'frustrated with [tool]' on Reddit.\n2. Target existing spreadsheet workarounds.\n3. Explore That's Missing for autonomous market gap telemetry."
+        },
+        "keyTopics": ["Market Gap Discovery", "SaaS Idea Validation", "Consumer Complaints", "That's Missing Sentinel"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:25:00.000Z"
+      },
+      {
+        "id": "lead_sm_mental_004",
+        "redditPostId": "1gc3w9z",
+        "title": "Feeling deeply isolated and overwhelmed. Just wish there was an anonymous safe space to talk without being judged.",
+        "selftext": "Work and personal life have been piling up, and I don't feel comfortable burdening my friends or family with my anxieties. Therapy is either on a 3-month waitlist or $180/hr. Are there any supportive, anonymous peer communities where people genuinely listen and support each other?",
+        "author": "quiet_wanderer_8",
+        "subreddit": "mentalhealth",
+        "permalink": "https://www.reddit.com/r/mentalhealth/comments/1gc3w9z/feeling_isolated_looking_for_safe_space/",
+        "createdUtc": 1725243600,
+        "redditScore": 76,
+        "numComments": 19,
+        "isLead": true,
+        "leadScore": 91,
+        "matchedProjectId": "soulamore",
+        "matchedProjectName": "Soulamore",
+        "intentCategory": "Seeking Anonymous Peer Support",
+        "urgency": "High",
+        "userPainPoint": "Struggling with isolation and burnout, unable to afford $180/hr therapy or burden friends, looking for a safe anonymous peer space.",
+        "recommendedAction": "Reply with empathetic validation and gentle community link",
+        "draftReply": "Hey u/quiet_wanderer_8, I hear you, and please know that you are not alone in feeling this way. Holding everything in because you don't want to 'burden' others is exhausting, and it takes real courage to acknowledge that you need an outlet.\n\nWhen therapy is unaffordable and friends feel too close, anonymous peer support can be a huge relief—just being in a space where others understand without judgment helps take the weight off.\n\nIf you are looking for a quiet, judgment-free space to connect with supportive listeners anonymously, **Soulamore** (https://hashlilly.in/labs/soulamore) is an anonymous peer wellness platform built exactly for this.\n\nTake things one breath at a time today. You matter, and there are people ready to listen.",
+        "alternativeReplies": {
+          "founderCasual": "Sending you strength. When therapy isn't accessible, having an anonymous peer space makes a world of difference. Soulamore (https://hashlilly.in/labs/soulamore) was created to give people a free, safe place to connect with empathetic peers.",
+          "actionableChecklist": "1. Be gentle with yourself today.\n2. Journal or vent in a safe environment.\n3. Explore Soulamore for anonymous, judgement-free peer listening."
+        },
+        "keyTopics": ["Peer Support", "Mental Wellness", "Anonymous Safe Space", "Soulamore"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:30:00.000Z"
+      },
+      {
+        "id": "lead_ay_biohack_005",
+        "redditPostId": "1gd5n2a",
+        "title": "How do you track blood test biomarkers (ApoB, HbA1c, Ferritin) over years instead of messy PDFs?",
+        "selftext": "Every time I get routine bloodwork or specialized panels done, Quest/Labcorp gives me a 10-page PDF report. I have 6 years worth of lab reports saved in Dropbox, but comparing trends over time is impossible unless I manually type 50 biomarkers into Excel. Is there an app that automatically parses lab PDFs and plots longitudinal biomarker graphs?",
+        "author": "quantified_runner",
+        "subreddit": "Biohackers",
+        "permalink": "https://www.reddit.com/r/Biohackers/comments/1gd5n2a/tracking_biomarkers_over_time_pdf_to_graphs/",
+        "createdUtc": 1725240000,
+        "redditScore": 132,
+        "numComments": 31,
+        "isLead": true,
+        "leadScore": 95,
+        "matchedProjectId": "ayuos",
+        "matchedProjectName": "AYUOS",
+        "intentCategory": "Seeking Biomarker Tracking & PDF OCR Solution",
+        "urgency": "High",
+        "userPainPoint": "Tired of manual Excel data entry for 6 years of lab PDF reports; seeking automated OCR biomarker extraction into longitudinal trend graphs.",
+        "recommendedAction": "Reply to Thread with biomarker tracking advice + AYUOS introduction",
+        "draftReply": "Hey u/quantified_runner, longitudinal tracking (observing the velocity and trajectory of markers like ApoB, hs-CRP, and HbA1c over years) is 10x more insightful than looking at a single point-in-time lab reference range.\n\nManually entering 50+ lines into Excel is error-prone and a huge friction point.\n\nIf you are looking for an automated health OS, **AYUOS** (https://ayuos.com) is built specifically for this:\n- Drag-and-drop your Quest/Labcorp PDF reports.\n- Automated OCR extracts 50+ standard biomarkers into interactive longitudinal trend charts.\n- Client-side encrypted (E2EE) so your personal health telemetry remains completely private to you.\n- Lets you generate time-limited summary links to share with doctors before consultations.\n\nHope this saves you hours of manual spreadsheet work!",
+        "alternativeReplies": {
+          "founderCasual": "Tracking longitudinal trends is crucial for preventive health. We built AyuOS (https://ayuos.com) to automatically OCR PDF lab sheets into longitudinal graphs with client-side encryption.",
+          "actionableChecklist": "1. Focus on trajectory rather than single reference numbers.\n2. Use automated OCR to parse legacy lab PDFs.\n3. Check out AYUOS (https://ayuos.com) for private, encrypted biomarker tracking."
+        },
+        "keyTopics": ["Longitudinal Biomarker Tracking", "Lab PDF OCR", "ApoB / HbA1c Trends", "AYUOS Health OS"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:35:00.000Z"
+      }
+    ];
+
+    async function fetchStats() {
+      try {
+        const res = await fetch('/api/stats');
+        const data = await res.json();
+        if (data.success && data.analytics) {
+          updateStatsUI(data.analytics);
+          return;
+        }
+      } catch (err) {
+        // Fallback for static hosting
+        const total = FALLBACK_LEADS.length;
+        const high = FALLBACK_LEADS.filter(l => l.leadScore >= 80).length;
+        const hl = FALLBACK_LEADS.filter(l => l.matchedProjectId === 'hashlilly').length;
+        updateStatsUI({ totalLeads: total, highIntentLeads: high, repliedLeads: 0, byProject: { hashlilly: hl } });
+      }
+    }
+
+    function updateStatsUI(a) {
+      document.getElementById('statTotal').innerText = a.totalLeads || 0;
+      document.getElementById('statHighIntent').innerText = a.highIntentLeads || 0;
+      document.getElementById('statReplied').innerText = a.repliedLeads || 0;
+      document.getElementById('statHashlilly').innerText = (a.byProject && a.byProject['hashlilly']) || 0;
+    }
+
+    async function fetchLeads() {
+      const container = document.getElementById('leadsContainer');
+      const countDisplay = document.getElementById('leadCountDisplay');
+
+      const params = new URLSearchParams({
+        projectId: currentProject,
+        status: currentStatus,
+        minScore: currentScore.toString()
+      });
+      if (searchQuery) params.append('search', searchQuery);
+
+      try {
+        const res = await fetch(`/api/leads?${params.toString()}`);
+        if (!res.ok) throw new Error('API offline');
+        const data = await res.json();
+        leadsData = data.leads || [];
+      } catch (err) {
+        // Static hosting fallback
+        leadsData = FALLBACK_LEADS.filter(l => {
+          if (currentProject !== 'all' && l.matchedProjectId !== currentProject) return false;
+          if (currentStatus !== 'all' && l.status !== currentStatus) return false;
+          if (currentScore && l.leadScore < currentScore) return false;
+          if (searchQuery) {
+            const q = searchQuery.toLowerCase();
+            return l.title.toLowerCase().includes(q) || l.selftext.toLowerCase().includes(q) || l.userPainPoint.toLowerCase().includes(q);
+          }
+          return true;
+        });
+      }
+
+      countDisplay.innerText = `Showing ${leadsData.length} leads`;
+
+      if (leadsData.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No leads found matching criteria</h3>
+            <p>Try lowering the score filter or click "Run Instant Scan" to harvest fresh Reddit threads.</p>
+            <button class="btn btn-primary" onclick="document.getElementById('btnRunScan').click()" style="margin-top: 16px;">
+              ⚡ Scan Now
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = leadsData.map(renderLeadCard).join('');
+    }
+
+    function renderLeadCard(lead) {
+      const isHigh = lead.leadScore >= 80;
+      const scoreClass = isHigh ? '' : 'amber';
+      const projClass = lead.matchedProjectId;
+
+      return `
+        <div class="lead-card ${isHigh ? 'high-intent' : ''}" id="card_${lead.id}">
+          <div class="lead-top-row">
+            <div class="lead-badges">
+              <span class="badge-project ${projClass}">${escapeHtml(lead.matchedProjectName)}</span>
+              <span class="badge-sub">r/${escapeHtml(lead.subreddit)}</span>
+              <span class="badge-author">u/${escapeHtml(lead.author)}</span>
+              <span style="font-size: 12px; color: var(--text-dim);">${formatTime(lead.createdUtc)}</span>
+            </div>
+            <div class="score-badge ${scoreClass}">
+              🔥 ${lead.leadScore} <span style="font-size: 11px; color: var(--text-muted); font-weight: 500;">/ 100</span>
+            </div>
+          </div>
+
+          <h3 class="lead-title">${escapeHtml(lead.title)}</h3>
+          
+          <div class="lead-body" id="body_${lead.id}">
+            ${escapeHtml(lead.selftext || '(No body text, image or link post)')}
+          </div>
+          ${lead.selftext && lead.selftext.length > 180 ? `<span class="expand-toggle" onclick="toggleExpand('${lead.id}')">Show Full Post ▾</span>` : ''}
+
+          <!-- Pain Point -->
+          <div class="painpoint-box">
+            <div class="painpoint-label">💡 AI Detected Pain Point & Intent</div>
+            <div class="painpoint-text">${escapeHtml(lead.userPainPoint)}</div>
+          </div>
+
+          <!-- Value-First Reply -->
+          <div class="reply-box">
+            <div class="reply-header">
+              <div class="reply-title">✨ Value-First Draft Reply (Anti-Spam Optimized)</div>
+              <div class="tone-selector">
+                <button class="tone-btn" onclick="regenerateTone('${lead.id}', 'Expert Breakdown')">⚡ Expert</button>
+                <button class="tone-btn" onclick="regenerateTone('${lead.id}', 'Founder Casual')">🤝 Founder</button>
+                <button class="tone-btn" onclick="regenerateTone('${lead.id}', 'Quick Checklist')">📋 Checklist</button>
+              </div>
+            </div>
+            <div class="reply-content" id="reply_${lead.id}">${escapeHtml(lead.draftReply)}</div>
+          </div>
+
+          <!-- Actions -->
+          <div class="card-actions">
+            <div class="action-group-left">
+              <button class="btn-copy-reddit" onclick="copyAndOpen('${lead.id}', '${lead.permalink}')">
+                📋 Copy Reply & Open Reddit
+              </button>
+              <a href="${lead.permalink}" target="_blank" rel="noopener noreferrer" class="btn-open-reddit">
+                🔗 View Thread
+              </a>
+            </div>
+
+            <div class="action-group-right">
+              <button class="status-badge-btn ${lead.status === 'replied' ? 'replied' : ''}" onclick="updateStatus('${lead.id}', 'replied')">
+                ${lead.status === 'replied' ? '✅ Replied' : 'Mark Replied'}
+              </button>
+              <button class="status-badge-btn ${lead.status === 'bookmarked' ? 'bookmarked' : ''}" onclick="updateStatus('${lead.id}', 'bookmarked')">
+                📌 Bookmark
+              </button>
+              <button class="status-badge-btn" onclick="updateStatus('${lead.id}', 'ignored')">
+                ❌ Dismiss
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function toggleExpand(id) {
+      const body = document.getElementById(`body_${id}`);
+      body.classList.toggle('expanded');
+    }
+
+    async function copyAndOpen(leadId, permalink) {
+      const replyEl = document.getElementById(`reply_${leadId}`);
+      if (replyEl) {
+        await navigator.clipboard.writeText(replyEl.innerText);
+        showToast('📋 Draft reply copied to clipboard! Opening Reddit...');
+        updateStatus(leadId, 'replied');
+        setTimeout(() => {
+          window.open(permalink, '_blank');
+        }, 300);
+      }
+    }
+
+    async function updateStatus(leadId, status) {
+      try {
+        const res = await fetch(`/api/leads/${leadId}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ status })
+        });
+        const result = await res.json();
+        if (result.success) {
+          fetchStats();
+          fetchLeads();
+        }
+      } catch (err) {
+        console.error('Status update error:', err);
+      }
+    }
+
+    async function regenerateTone(leadId, tone) {
+      const replyEl = document.getElementById(`reply_${leadId}`);
+      replyEl.innerText = 'Regenerating draft with tone: ' + tone + '...';
+
+      try {
+        const res = await fetch('/api/generate-reply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ leadId, tone })
+        });
+        const data = await res.json();
+        if (data.success) {
+          replyEl.innerText = data.draftReply;
+        }
+      } catch (err) {
+        replyEl.innerText = 'Failed to regenerate reply.';
+      }
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function formatTime(utcSec) {
+      const diff = Math.floor(Date.now() / 1000 - utcSec);
+      if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
+      if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
+      return `${Math.floor(diff / 86400)}d ago`;
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    init();
+  </script>
+</body>
+</html>

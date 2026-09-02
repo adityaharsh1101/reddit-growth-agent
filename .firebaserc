@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "gen-lang-client-0758786889"
+  },
+  "targets": {
+    "gen-lang-client-0758786889": {
+      "hosting": {
+        "reddit-lead-sentinel": [
+          "reddit-lead-sentinel"
+        ]
+      }
+    }
+  }
+}

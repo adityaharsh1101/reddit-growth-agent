@@ -1,0 +1,44 @@
+{
+  "name": "reddit-growth-agent",
+  "version": "1.0.0",
+  "description": "Autonomous Reddit Growth & Lead Sentinel Agent for Hashlilly Resume Engine, That's Missing, Soulamore, AYUOS",
+  "main": "dist/server/index.js",
+  "scripts": {
+    "dev": "tsx watch src/server/index.ts",
+    "build": "tsc",
+    "start": "node dist/server/index.js",
+    "scan": "tsx src/sentinel/cli.ts --scan",
+    "scan:hashlilly": "tsx src/sentinel/cli.ts --project hashlilly",
+    "scan:thatsmissing": "tsx src/sentinel/cli.ts --project thatsmissing",
+    "scan:soulamore": "tsx src/sentinel/cli.ts --project soulamore",
+    "scan:ayuos": "tsx src/sentinel/cli.ts --project ayuos",
+    "watch-daemon": "tsx src/sentinel/cli.ts --watch"
+  },
+  "keywords": [
+    "reddit",
+    "growth-agent",
+    "lead-generation",
+    "hashlilly",
+    "resume-engine",
+    "thatsmissing",
+    "soulamore",
+    "ayuos",
+    "ai-agent"
+  ],
+  "author": "Aditya Harsh",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "fast-xml-parser": "^5.11.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
