@@ -2,6 +2,10 @@ node_modules
 dist
 .env
 .env.local
+.firebase
+*service_account*.json
+*firebase-adminsdk*.json
 *.log
 npm-debug.log*
 .DS_Store
+
