@@ -45,10 +45,11 @@ app.get('/api/projects', (req, res) => {
  * Get leads with flexible filtering
  */
 app.get('/api/leads', (req, res) => {
-  const { projectId, status, minScore, search } = req.query;
+  const { projectId, status, minScore, search, cluster } = req.query;
 
   let leads = storage.getLeads({
     projectId: projectId as string,
+    cluster: cluster as string,
     status: status as string,
     minScore: minScore ? parseInt(minScore as string, 10) : undefined
   });
@@ -83,7 +84,7 @@ app.post('/api/scan', async (req, res) => {
     });
   }
 
-  const { projectId } = req.body;
+  const { projectId, cluster } = req.body;
   isScanning = true;
 
   try {
@@ -92,6 +93,8 @@ app.post('/api/scan', async (req, res) => {
 
     if (projectId && PROJECTS_CONFIG[projectId]) {
       rawPosts = await scanner.scanForProject(PROJECTS_CONFIG[projectId], 20);
+    } else if (cluster) {
+      rawPosts = await scanner.scanCluster(cluster);
     } else {
       rawPosts = await scanner.scanAllProjects();
     }
@@ -227,6 +230,7 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`\n🚀 Reddit Growth & Lead Sentinel API running on http://localhost:${PORT}`);
-  console.log(`🌿 Hashlilly Resume Engine Focus: Active`);
-  console.log(`📊 That's Missing, 🌸 Soulamore, 🧬 AYUOS: Active\n`);
+  console.log(`🌿 Hashlilly Ecosystem: Resume Engine, Influence OS, LilyPost`);
+  console.log(`📊 Ventures: That's Missing, Paisa, SignalPro, NeonStudio, Draftly, Soulamore, AYUOS`);
+  console.log(`💾 Infrastructure: SyncNode, Telegram Drive, TerraClaw, God's Eye, OSIRIS & more (${Object.keys(PROJECTS_CONFIG).length} projects configured)\n`);
 });

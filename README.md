@@ -44,22 +44,59 @@
 
 ---
 
-## 🎯 Target Project Matrix & Focus
+## 🎯 Target Project Matrix & Clusters (20 Ventures)
 
+### 1. Career, Talent & Creator Growth
 | Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
 | :--- | :--- | :--- | :--- |
-| **🌿 Hashlilly (Resume Engine & ATS Hub)** | AI Resume Builder, ATS Score Optimizer, Job Description Tailoring, STAR Metrics | `r/resumes`, `r/jobs`, `r/careerguidance`, `r/recruitinghell`, `r/cscareerquestions`, `r/EngineeringResumes`, `r/jobsearchhacks` | "applied to 200 jobs 0 callbacks", "ATS friendly resume", "ATS score checker", "tailor resume to JD", "2-column resume failure" |
-| **📊 That's Missing** | Autonomous Market Signal Sentinel & Startup Validation | `r/startups`, `r/Entrepreneur`, `r/SideProject`, `r/SaaS`, `r/IndieHackers`, `r/roastmystartup` | "how to find SaaS ideas", "validate startup idea", "unaddressed software complaints", "market gaps" |
-| **🌸 Soulamore** | Anonymous Peer Mental Wellness Ecosystem & Safe Spaces | `r/mentalhealth`, `r/anxiety`, `r/lonely`, `r/depression_help`, `r/KindVoice`, `r/CasualConversation` | "need someone to talk to", "feeling isolated/overwhelmed", "anonymous place to vent", "safe emotional space" |
-| **🧬 AYUOS** | Sovereign Health OS & AI Biomarker Tracking | `r/Biohackers`, `r/QuantifiedSelf`, `r/HealthIT`, `r/digitalhealth`, `r/Fitness`, `r/longevity` | "track blood tests over time", "organize lab PDF reports", "extract biomarkers with OCR", "E2EE health records" |
+| **🌿 Hashlilly (Resume Engine & ATS Hub)** | AI Resume Builder, ATS Score Optimizer, JD Tailoring, STAR Metrics | `r/resumes`, `r/jobs`, `r/careerguidance`, `r/recruitinghell`, `r/cscareerquestions`, `r/EngineeringResumes` | 0 callbacks, ATS rejection, multi-column template failure, resume tailoring |
+| **⭐ Hashlilly Influence OS** | Influencer Marketing OS, Brand Fit Index (BFI), Fake Follower Audit, Escrow | `r/influencermarketing`, `r/Instagrammarketing`, `r/ecommerce`, `r/marketing`, `r/smallbusiness` | influencer ROI calculator, spotting fake followers, influencer contract template |
+| **📱 LilyPost & Social** | Social Media Scheduler, Carousel Publishing, Cold Email Mail Merge | `r/socialmediamarketing`, `r/content_marketing`, `r/digitalmarketing`, `r/Emailmarketing`, `r/smallbusiness` | free carousel scheduler, schedule Instagram carousel without watermark, cold email mail merge |
+| **🏛️ SAGA** | Network for South Asian Architects & Designers in Germany (Kammer Registration) | `r/germany`, `r/IndiansInGermany`, `r/architecture`, `r/berlin`, `r/munich` | architect registration in Germany, Anerkennung architect degree Germany, Architektenkammer approval |
+
+### 2. Startup Validation, SaaS & Finance
+| Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
+| :--- | :--- | :--- | :--- |
+| **📊 That's Missing** | Autonomous Market Signal Sentinel & Startup Validation | `r/startups`, `r/Entrepreneur`, `r/SideProject`, `r/SaaS`, `r/IndieHackers`, `r/roastmystartup` | how to find SaaS ideas, validate startup idea, unaddressed software complaints |
+| **💰 Paisa** | Co-Founder Expense Splitting, Runway Calculator & Financial Health Tracker | `r/startups`, `r/Entrepreneur`, `r/smallbusiness`, `r/IndiaInvestments`, `r/SaaS` | split expenses between cofounders, startup runway calculator, tracking founder equity dilution |
+| **📈 SignalPro Dashboard** | Real-Time Market Terminal, Futures Screener, $10k Paper Trading, ELI5 Gemini Summaries | `r/Daytrading`, `r/stocks`, `r/options`, `r/cryptocurrency`, `r/algotrading`, `r/wallstreetbets` | free real-time futures screener, paper trading platform with realistic fills, crypto liquidation heatmap |
+| **🖥️ DeskAI** | Desktop AI Co-Processor, Offline Workflows, Native Windows Hotkey | `r/productivity`, `r/software`, `r/windows`, `r/LocalLLaMA`, `r/ArtificialInteligence` | desktop AI assistant with local context, global hotkey AI wrapper, run models locally on Windows |
+
+### 3. Creative AI & Media Tools
+| Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
+| :--- | :--- | :--- | :--- |
+| **🎨 NeonStudio / Unflag** | C2PA Metadata Stripper, AI Watermark Eraser, Directional Portrait Relighting | `r/StableDiffusion`, `r/midjourney`, `r/ArtificialInteligence`, `r/graphic_design`, `r/photoshop` | remove C2PA metadata from image, AI generated image flagged, portrait relighting tool |
+| **🖌️ Draftly Studio** | Node-Based Visual AI Canvas (Flux.1 Dev, Wan 2.1, AnimateDiff) | `r/comfyui`, `r/StableDiffusion`, `r/AI_Art`, `r/generative`, `r/videoediting` | node based canvas for AI image gen, run Flux on local GPU, web alternative to ComfyUI |
+| **🌌 Midnight Skies** | Celestial Planetarium, 300 DPI Vector PDF Star Map Posters, Dual-Sky Date Comparison | `r/astronomy`, `r/Stargazing`, `r/giftideas`, `r/weddingplanning`, `r/graphic_design` | custom star map high resolution printable, print your own star map vector PDF, anniversary star map |
+
+### 4. Sovereign Health, Wellness & Community
+| Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
+| :--- | :--- | :--- | :--- |
+| **🌸 Soulamore** | Anonymous Peer Mental Wellness Ecosystem & Safe Spaces | `r/mentalhealth`, `r/anxiety`, `r/lonely`, `r/depression_help`, `r/KindVoice`, `r/CasualConversation` | need someone to talk to, feeling isolated or overwhelmed, anonymous place to vent |
+| **🧬 AYUOS** | Sovereign Health OS, E2EE Medical Records & 50+ Biomarker OCR Tracking | `r/Biohackers`, `r/QuantifiedSelf`, `r/HealthIT`, `r/digitalhealth`, `r/Fitness`, `r/longevity` | track blood tests over time, organize lab PDF reports, extract biomarkers with OCR, E2EE health records |
+| **🍷 BoozedIn** | Beverage Industry Professional Network, 5-Axis Radar Flavor Profiles | `r/bartenders`, `r/cocktails`, `r/beverage`, `r/distilling`, `r/sommelier` | beverage industry networking, cocktail flavor matrix database, radar chart for spirits tasting |
+| **⏰ Daybreak** | Mindful iOS Alarm Clock (SwiftUI) with 0-15 Min Volume Ramp & Apple Critical Alerts | `r/iphone`, `r/sleep`, `r/productivity`, `r/iosapps`, `r/insomnia` | gentle alarm clock app iOS, alarm that ramps volume slowly, Spotify alarm clock app |
+
+### 5. Privacy, Storage & P2P Systems
+| Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
+| :--- | :--- | :--- | :--- |
+| **🔒 SyncNode** | Local-First P2P E2EE File Sync Engine, Multi-Device Delta Sync, Zero Cloud Relay | `r/selfhosted`, `r/privacy`, `r/DataHoarder`, `r/sysadmin`, `r/opensource` | peer to peer file sync without third party cloud, Syncthing alternative with instant discovery |
+| **💾 Telegram Drive** | Native Windows Virtual Drive Mount (T:\) on Unlimited Telegram Cloud Storage | `r/selfhosted`, `r/DataHoarder`, `r/piracy`, `r/Telegram`, `r/windows` | mount Telegram as local drive Windows, free cloud backup unlimited, Dokan drive wrapper Telegram |
+
+### 6. Geospatial, OSINT & Surveillance
+| Project | Primary Focus Area | Monitored Subreddits | Intent Triggers |
+| :--- | :--- | :--- | :--- |
+| **🌍 TerraClaw** | Geodesign Intelligence Platform, CesiumJS 3D Photorealistic Tiles, FAR Density, BIM | `r/urbanplanning`, `r/gis`, `r/architecture`, `r/civilengineering`, `r/surveying` | 3D site analysis in browser, calculate FAR and setbacks on 3D terrain, CesiumJS photorealistic tiles |
+| **🛰️ God's Eye View** | 3D Spy-Satellite Simulator & OSINT Globe (Live ADS-B Flights, AIS Ships, USGS Quakes) | `r/OSINT`, `r/aviation`, `r/maritime`, `r/geopolitics`, `r/intelligence` | real-time OSINT 3D globe tracker, ADS-B and AIS visualizer on one map, satellite pass predictor |
+| **🛡️ OSIRIS Intelligence** | GPU WebGL Situational Awareness Dashboard (17,000+ CCTVs, FIRMS Fires, Sanctions) | `r/OSINT`, `r/homelandsecurity`, `r/geopolitics`, `r/infosec`, `r/disastermanagement` | public CCTV feeds map global, NASA FIRMS active fire layer webgl, live crisis situational awareness |
 
 ---
 
 ## 🛡️ Value-First Anti-Spam Strategy
 
 Reddit communities aggressively filter self-promotion and bots. The Sentinel enforces a **Value-First Conversational Protocol**:
-1. **80% Organic Help Upfront**: Solves the user's specific problem in expert, empathetic language (e.g. diagnosing why multi-column resumes break ATS parsers).
-2. **20% Contextual Product Introduction**: Naturally introduces your tool as a free/helpful resource.
+1. **80% Organic Help Upfront**: Solves the user's specific problem in expert, empathetic language (e.g. diagnosing why multi-column resumes break ATS parsers or explaining how CesiumJS handles 3D tiles).
+2. **20% Contextual Product Introduction**: Naturally introduces your tool as an open, free, or founder-built resource to solve that exact pain point.
 3. **Multi-Tone Switching**: Pre-generates responses in 3 distinct angles:
    - **⚡ Expert Breakdown**: In-depth technical breakdown and formatting best practices.
    - **🤝 Founder Casual**: Transparent builder perspective sharing lessons learned.
@@ -102,20 +139,42 @@ Visit `http://localhost:3800` to interact with the glassmorphic lead inbox.
 
 ## ⚙️ CLI Commands
 
+Run targeted scans for any of your 20 venture profiles:
+
 ```bash
-# Scan specifically for Hashlilly Resume Engine
-npm run scan:hashlilly
+# Career & Creator Suite
+npm run scan:hashlilly       # Hashlilly Resume Engine
+npm run scan:influenceos     # Hashlilly Influence OS
+npm run scan:lilypost        # LilyPost & Social
+npm run scan:saga            # SAGA German Architecture Network
 
-# Scan specifically for That's Missing
-npm run scan:thatsmissing
+# Startup & Finance Suite
+npm run scan:thatsmissing    # That's Missing
+npm run scan:paisa           # Paisa Co-Founder Expense Splitting
+npm run scan:signalpro       # SignalPro Trading Terminal
+npm run scan:deskai          # DeskAI Desktop Co-Processor
 
-# Scan specifically for Soulamore
-npm run scan:soulamore
+# Creative AI Suite
+npm run scan:neonstudio      # NeonStudio / Unflag
+npm run scan:draftly         # Draftly Studio
+npm run scan:midnightskies   # Midnight Skies Star Maps
 
-# Scan specifically for AYUOS
-npm run scan:ayuos
+# Health & Community Suite
+npm run scan:soulamore       # Soulamore
+npm run scan:ayuos           # AYUOS Sovereign Health
+npm run scan:boozedin        # BoozedIn Beverage Network
+npm run scan:daybreak        # Daybreak iOS Alarm
 
-# Scan across all studio ventures
+# Privacy & Storage Suite
+npm run scan:syncnode        # SyncNode P2P Sync
+npm run scan:telegramdrive   # Telegram Drive (T:\)
+
+# Geospatial & OSINT Suite
+npm run scan:terraclaw       # TerraClaw Geodesign
+npm run scan:godseye         # God's Eye View OSINT Globe
+npm run scan:osiris          # OSIRIS Intelligence Dashboard
+
+# Full scan across all ventures
 npm run scan
 
 # Run continuous background monitoring daemon (every 30 mins)

@@ -268,50 +268,43 @@ Output strictly valid JSON with this exact schema:
   }
 
   private guessTargetProject(post: RawRedditPost): ProjectConfig {
-    const text = (post.title + ' ' + post.selftext + ' ' + post.subreddit).toLowerCase();
+    const text = (post.title + ' ' + post.selftext).toLowerCase();
+    const sub = (post.subreddit || '').toLowerCase();
 
-    if (
-      text.includes('resume') ||
-      text.includes('ats') ||
-      text.includes('job application') ||
-      text.includes('callback') ||
-      post.subreddit.toLowerCase().includes('resume') ||
-      post.subreddit.toLowerCase().includes('recruiting')
-    ) {
-      return PROJECTS_CONFIG.hashlilly;
+    let bestProject: ProjectConfig = PROJECTS_CONFIG.hashlilly;
+    let highestWeight = -1;
+
+    for (const project of Object.values(PROJECTS_CONFIG)) {
+      let weight = 0;
+
+      // Subreddit match is a strong signal
+      if (project.targetSubreddits.some(s => s.toLowerCase() === sub)) {
+        weight += 10;
+      }
+
+      // Intent triggers
+      for (const trigger of project.intentTriggers) {
+        if (text.includes(trigger.toLowerCase())) {
+          weight += 5;
+        }
+      }
+
+      // Search queries
+      for (const q of project.searchQueries) {
+        const words = q.toLowerCase().split(/\s+/).filter(w => w.length > 3);
+        const matches = words.filter(w => text.includes(w));
+        if (matches.length >= 2) {
+          weight += 3;
+        }
+      }
+
+      if (weight > highestWeight) {
+        highestWeight = weight;
+        bestProject = project;
+      }
     }
 
-    if (
-      text.includes('saas idea') ||
-      text.includes('market gap') ||
-      text.includes('startup idea') ||
-      text.includes('validate') ||
-      post.subreddit.toLowerCase().includes('startup') ||
-      post.subreddit.toLowerCase().includes('entrepreneur')
-    ) {
-      return PROJECTS_CONFIG.thatsmissing;
-    }
-
-    if (
-      text.includes('anxiety') ||
-      text.includes('depress') ||
-      text.includes('lonely') ||
-      text.includes('vent') ||
-      post.subreddit.toLowerCase().includes('mental')
-    ) {
-      return PROJECTS_CONFIG.soulamore;
-    }
-
-    if (
-      text.includes('blood test') ||
-      text.includes('biomarker') ||
-      text.includes('health record') ||
-      post.subreddit.toLowerCase().includes('biohack')
-    ) {
-      return PROJECTS_CONFIG.ayuos;
-    }
-
-    return PROJECTS_CONFIG.hashlilly;
+    return bestProject;
   }
 
   private generateHeuristicLead(post: RawRedditPost, project: ProjectConfig): QualifiedLead {
@@ -371,11 +364,11 @@ Rooting for you—don't give up!`;
 
     return `Hey u/${post.author}, ${project.replyStrategy.sampleOpening}
 
-A good approach to tackle this is:
-1. Break down the core bottleneck into measurable steps.
-2. Avoid over-complicating early on.
-3. ${project.replyStrategy.callToAction} (${project.websiteUrl}).
+Here are 3 actionable ways to address this:
+1. **Focus on the Core Bottleneck**: Avoid over-complicating workflows before validating the baseline.
+2. **Standardize Your Tooling**: Use dedicated utilities rather than manual workarounds.
+3. **Explore Specialized Solutions**: ${project.replyStrategy.callToAction} (${project.websiteUrl}).
 
-Hope this helps give some direction!`;
+Hope this gives clarity and helps you move forward!`;
   }
 }

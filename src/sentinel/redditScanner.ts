@@ -31,17 +31,19 @@ const sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 export class RedditScanner {
   private lastRequestTime = 0;
-  private minIntervalMs = 2800; // Safe rate-limit throttle interval
+  private minIntervalMs = 3200; // Safe base interval
   private xmlParser = new XMLParser({
     ignoreAttributes: false,
     attributeNamePrefix: '@_'
   });
 
-  private async fetchRss(url: string): Promise<string | null> {
+  private async fetchRss(url: string, retries = 1): Promise<string | null> {
+    const jitter = Math.floor(Math.random() * 800);
+    const targetInterval = this.minIntervalMs + jitter;
     const now = Date.now();
     const elapsed = now - this.lastRequestTime;
-    if (elapsed < this.minIntervalMs) {
-      await sleep(this.minIntervalMs - elapsed);
+    if (elapsed < targetInterval) {
+      await sleep(targetInterval - elapsed);
     }
     this.lastRequestTime = Date.now();
 
@@ -58,6 +60,11 @@ export class RedditScanner {
       });
       return res.data;
     } catch (err: any) {
+      if (err.response?.status === 429 && retries > 0) {
+        console.warn(`[RedditScanner] Rate limited (429) on ${url}. Backing off 5s before retry...`);
+        await sleep(5000 + Math.floor(Math.random() * 2000));
+        return this.fetchRss(url, retries - 1);
+      }
       console.warn(`[RedditScanner] Error fetching RSS from ${url}: ${err.message}`);
       return null;
     }
@@ -146,6 +153,24 @@ export class RedditScanner {
       const posts = await this.scanForProject(proj, 2);
       for (const p of posts) {
         combined.set(p.id, p);
+      }
+    }
+    return Array.from(combined.values());
+  }
+
+  /**
+   * Scans across all registered projects in a given cluster
+   */
+  async scanCluster(clusterName: string): Promise<RawRedditPost[]> {
+    const combined: Map<string, RawRedditPost> = new Map();
+    const normalized = clusterName.toLowerCase();
+    for (const key of Object.keys(PROJECTS_CONFIG)) {
+      const proj = PROJECTS_CONFIG[key];
+      if (proj.cluster.toLowerCase().includes(normalized)) {
+        const posts = await this.scanForProject(proj, 2);
+        for (const p of posts) {
+          combined.set(p.id, p);
+        }
       }
     }
     return Array.from(combined.values());

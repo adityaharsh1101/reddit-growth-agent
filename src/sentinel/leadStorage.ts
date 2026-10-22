@@ -10,6 +10,8 @@ const DATA_DIR = path.resolve(__dirname, '../../data');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
 const SEEN_POSTS_FILE = path.join(DATA_DIR, 'seen_posts.json');
 
+import { PROJECTS_CONFIG } from '../config/projects.js';
+
 export class LeadStorage {
   constructor() {
     this.ensureDataDir();
@@ -27,7 +29,7 @@ export class LeadStorage {
     }
   }
 
-  getLeads(filter?: { projectId?: string; status?: string; minScore?: number }): QualifiedLead[] {
+  getLeads(filter?: { projectId?: string; status?: string; minScore?: number; cluster?: string }): QualifiedLead[] {
     try {
       const raw = fs.readFileSync(LEADS_FILE, 'utf-8');
       let leads: QualifiedLead[] = JSON.parse(raw);
@@ -35,6 +37,13 @@ export class LeadStorage {
       if (filter) {
         if (filter.projectId && filter.projectId !== 'all') {
           leads = leads.filter(l => l.matchedProjectId === filter.projectId);
+        }
+        if (filter.cluster && filter.cluster !== 'all') {
+          const normCluster = filter.cluster.toLowerCase();
+          leads = leads.filter(l => {
+            const proj = PROJECTS_CONFIG[l.matchedProjectId];
+            return proj && proj.cluster.toLowerCase().includes(normCluster);
+          });
         }
         if (filter.status && filter.status !== 'all') {
           leads = leads.filter(l => l.status === filter.status);
@@ -108,10 +117,14 @@ export class LeadStorage {
 
     const byProject: Record<string, number> = {};
     const bySubreddit: Record<string, number> = {};
+    const byCluster: Record<string, number> = {};
 
     leads.forEach(l => {
       byProject[l.matchedProjectId] = (byProject[l.matchedProjectId] || 0) + 1;
       bySubreddit[l.subreddit] = (bySubreddit[l.subreddit] || 0) + 1;
+      const proj = PROJECTS_CONFIG[l.matchedProjectId];
+      const cl = proj?.cluster || 'Other';
+      byCluster[cl] = (byCluster[cl] || 0) + 1;
     });
 
     return {
@@ -120,7 +133,8 @@ export class LeadStorage {
       repliedLeads: replied,
       bookmarkedLeads: bookmarked,
       byProject,
-      bySubreddit
+      bySubreddit,
+      byCluster
     };
   }
 }

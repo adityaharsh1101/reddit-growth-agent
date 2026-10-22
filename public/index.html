@@ -337,9 +337,39 @@
       gap: 16px;
     }
 
+    .cluster-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4px;
+    }
+
+    .cluster-btn {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cluster-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFF;
+    }
+    .cluster-btn.active {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: #6366F1;
+      color: #A5B4FC;
+    }
+
     .project-tabs {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
     }
 
@@ -491,26 +521,26 @@
       color: #A5B4FC;
       border: 1px solid rgba(99, 102, 241, 0.3);
     }
-    .badge-project.hashlilly {
-      background: rgba(16, 185, 129, 0.15);
-      color: #6EE7B7;
-      border-color: rgba(16, 185, 129, 0.3);
-    }
-    .badge-project.thatsmissing {
-      background: rgba(99, 102, 241, 0.15);
-      color: #A5B4FC;
-      border-color: rgba(99, 102, 241, 0.3);
-    }
-    .badge-project.soulamore {
-      background: rgba(236, 72, 153, 0.15);
-      color: #F472B6;
-      border-color: rgba(236, 72, 153, 0.3);
-    }
-    .badge-project.ayuos {
-      background: rgba(6, 182, 212, 0.15);
-      color: #67E8F9;
-      border-color: rgba(6, 182, 212, 0.3);
-    }
+    .badge-project.hashlilly { background: rgba(16, 185, 129, 0.15); color: #6EE7B7; border-color: rgba(16, 185, 129, 0.3); }
+    .badge-project.influenceos { background: rgba(139, 92, 246, 0.15); color: #C4B5FD; border-color: rgba(139, 92, 246, 0.3); }
+    .badge-project.lilypost { background: rgba(236, 72, 153, 0.15); color: #F472B6; border-color: rgba(236, 72, 153, 0.3); }
+    .badge-project.thatsmissing { background: rgba(99, 102, 241, 0.15); color: #A5B4FC; border-color: rgba(99, 102, 241, 0.3); }
+    .badge-project.paisa { background: rgba(245, 158, 11, 0.15); color: #FCD34D; border-color: rgba(245, 158, 11, 0.3); }
+    .badge-project.signalpro { background: rgba(59, 130, 246, 0.15); color: #93C5FD; border-color: rgba(59, 130, 246, 0.3); }
+    .badge-project.neonstudio { background: rgba(244, 63, 94, 0.15); color: #FDA4AF; border-color: rgba(244, 63, 94, 0.3); }
+    .badge-project.draftly { background: rgba(168, 85, 247, 0.15); color: #D8B4FE; border-color: rgba(168, 85, 247, 0.3); }
+    .badge-project.soulamore { background: rgba(236, 72, 153, 0.15); color: #F472B6; border-color: rgba(236, 72, 153, 0.3); }
+    .badge-project.ayuos { background: rgba(6, 182, 212, 0.15); color: #67E8F9; border-color: rgba(6, 182, 212, 0.3); }
+    .badge-project.boozedin { background: rgba(217, 119, 6, 0.15); color: #FBBF24; border-color: rgba(217, 119, 6, 0.3); }
+    .badge-project.syncnode { background: rgba(20, 184, 166, 0.15); color: #5EEAD4; border-color: rgba(20, 184, 166, 0.3); }
+    .badge-project.telegramdrive { background: rgba(14, 165, 233, 0.15); color: #7DD3FC; border-color: rgba(14, 165, 233, 0.3); }
+    .badge-project.terraclaw { background: rgba(100, 116, 139, 0.2); color: #CBD5E1; border-color: rgba(100, 116, 139, 0.4); }
+    .badge-project.godseye { background: rgba(225, 29, 72, 0.15); color: #FDA4AF; border-color: rgba(225, 29, 72, 0.3); }
+    .badge-project.osiris { background: rgba(0, 229, 255, 0.15); color: #67E8F9; border-color: rgba(0, 229, 255, 0.4); }
+    .badge-project.midnightskies { background: rgba(99, 102, 241, 0.15); color: #C7D2FE; border-color: rgba(99, 102, 241, 0.3); }
+    .badge-project.daybreak { background: rgba(249, 115, 22, 0.15); color: #FDBA74; border-color: rgba(249, 115, 22, 0.3); }
+    .badge-project.deskai { background: rgba(71, 85, 105, 0.2); color: #E2E8F0; border-color: rgba(71, 85, 105, 0.4); }
+    .badge-project.saga { background: rgba(4, 120, 87, 0.15); color: #6EE7B7; border-color: rgba(4, 120, 87, 0.3); }
 
     .badge-sub {
       font-family: 'JetBrains Mono', monospace;
@@ -828,7 +858,7 @@
             </div>
           </h1>
           <p style="font-size: 13px; color: var(--text-dim); margin-top: 2px;">
-            AI Growth Agent for <strong>Hashlilly Resume Engine</strong>, That's Missing, Soulamore & AYUOS
+            AI Growth Agent for <strong>Hashlilly Venture Suite</strong>, That's Missing, Paisa, SignalPro, Draftly, Soulamore & 15+ Projects
           </p>
         </div>
       </div>
@@ -893,10 +923,10 @@
       </div>
       <div class="stat-card">
         <div class="stat-info">
-          <div class="stat-label">🌿 Hashlilly (Resume)</div>
-          <div class="stat-value" id="statHashlilly" style="color: #6EE7B7;">0</div>
+          <div class="stat-label">🏢 Active Ventures</div>
+          <div class="stat-value" id="statVentures" style="color: #6EE7B7;">20</div>
         </div>
-        <div class="stat-icon">📄</div>
+        <div class="stat-icon">🌐</div>
       </div>
       <div class="stat-card">
         <div class="stat-info">
@@ -909,12 +939,40 @@
 
     <!-- Filter Toolbar -->
     <div class="toolbar-section">
+      <!-- Category Cluster Filter -->
+      <div class="cluster-tabs" id="clusterTabs">
+        <button class="cluster-btn active" data-cluster="all">🌐 All Ventures (20)</button>
+        <button class="cluster-btn" data-cluster="Flagship SaaS">🌿 Flagship SaaS</button>
+        <button class="cluster-btn" data-cluster="Startup & Finance">💰 Startup & Finance</button>
+        <button class="cluster-btn" data-cluster="Creator & AI Studio">🎨 Creator & AI Studio</button>
+        <button class="cluster-btn" data-cluster="Health & Community">🌸 Health & Community</button>
+        <button class="cluster-btn" data-cluster="Privacy & Storage">💾 Privacy & Storage</button>
+        <button class="cluster-btn" data-cluster="Geospatial & OSINT">🗺️ Geospatial & OSINT</button>
+      </div>
+
+      <!-- Project Filter Buttons -->
       <div class="project-tabs" id="projectTabs">
-        <button class="tab-btn active hashlilly-tab" data-project="hashlilly">🌿 Hashlilly (Resume Engine)</button>
-        <button class="tab-btn" data-project="thatsmissing">📊 That's Missing</button>
-        <button class="tab-btn" data-project="soulamore">🌸 Soulamore</button>
-        <button class="tab-btn" data-project="ayuos">🧬 AYUOS</button>
-        <button class="tab-btn" data-project="all">🌐 All Projects</button>
+        <button class="tab-btn active hashlilly-tab" data-project="hashlilly" data-cluster="Flagship SaaS">🌿 Hashlilly Resume Engine</button>
+        <button class="tab-btn" data-project="influenceos" data-cluster="Flagship SaaS">🎯 Influence OS</button>
+        <button class="tab-btn" data-project="lilypost" data-cluster="Flagship SaaS">💌 LilyPost & Social</button>
+        <button class="tab-btn" data-project="thatsmissing" data-cluster="Startup & Finance">📊 That's Missing</button>
+        <button class="tab-btn" data-project="paisa" data-cluster="Startup & Finance">💰 Paisa Finance</button>
+        <button class="tab-btn" data-project="signalpro" data-cluster="Startup & Finance">📈 SignalPro</button>
+        <button class="tab-btn" data-project="neonstudio" data-cluster="Creator & AI Studio">💡 NeonStudio</button>
+        <button class="tab-btn" data-project="draftly" data-cluster="Creator & AI Studio">🎨 Draftly Studio</button>
+        <button class="tab-btn" data-project="midnightskies" data-cluster="Creator & AI Studio">🌌 Midnight Skies</button>
+        <button class="tab-btn" data-project="deskai" data-cluster="Creator & AI Studio">💻 DeskAI</button>
+        <button class="tab-btn" data-project="soulamore" data-cluster="Health & Community">🌸 Soulamore</button>
+        <button class="tab-btn" data-project="ayuos" data-cluster="Health & Community">🧬 AYUOS</button>
+        <button class="tab-btn" data-project="boozedin" data-cluster="Health & Community">🍺 BoozedIn</button>
+        <button class="tab-btn" data-project="daybreak" data-cluster="Health & Community">🌅 Daybreak</button>
+        <button class="tab-btn" data-project="saga" data-cluster="Health & Community">🏛️ SAGA</button>
+        <button class="tab-btn" data-project="syncnode" data-cluster="Privacy & Storage">🔄 SyncNode</button>
+        <button class="tab-btn" data-project="telegramdrive" data-cluster="Privacy & Storage">💾 Telegram Drive</button>
+        <button class="tab-btn" data-project="terraclaw" data-cluster="Geospatial & OSINT">📐 TerraClaw</button>
+        <button class="tab-btn" data-project="godseye" data-cluster="Geospatial & OSINT">🌐 God's Eye</button>
+        <button class="tab-btn" data-project="osiris" data-cluster="Geospatial & OSINT">⬡ OSIRIS Intel</button>
+        <button class="tab-btn" data-project="all" data-cluster="all">🌐 All Leads</button>
       </div>
 
       <div class="filter-controls">
@@ -1057,7 +1115,32 @@
     }
 
     function setupEventListeners() {
-      // Tabs
+      // Cluster Category Filter
+      document.querySelectorAll('#clusterTabs .cluster-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('#clusterTabs .cluster-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cluster = btn.getAttribute('data-cluster');
+
+          let firstVisibleBtn = null;
+          document.querySelectorAll('#projectTabs .tab-btn').forEach(pBtn => {
+            const pCluster = pBtn.getAttribute('data-cluster');
+            const isMatch = cluster === 'all' || pCluster === cluster || pBtn.getAttribute('data-project') === 'all';
+            pBtn.style.display = isMatch ? 'inline-flex' : 'none';
+            if (isMatch && !firstVisibleBtn && pBtn.getAttribute('data-project') !== 'all') {
+              firstVisibleBtn = pBtn;
+            }
+          });
+
+          // If current project is now hidden, select the first visible project in this cluster
+          const activeProjectBtn = document.querySelector('#projectTabs .tab-btn.active');
+          if (activeProjectBtn && activeProjectBtn.style.display === 'none' && firstVisibleBtn) {
+            firstVisibleBtn.click();
+          }
+        });
+      });
+
+      // Project Tabs
       document.querySelectorAll('#projectTabs .tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
           document.querySelectorAll('#projectTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -1162,45 +1245,73 @@
         "urgency": "Critical",
         "userPainPoint": "250+ applications with 0 callbacks due to a 2-column Canva template with skill bars that breaks ATS parsers (Workday/Greenhouse).",
         "recommendedAction": "Reply to Thread with ATS formatting tips and free audit link",
-        "draftReply": "Hey u/dev_career_throwaway, yes—unfortunately, what you heard is 100% accurate.\n\nCanva and 2-column templates with graphical skill bars are the #1 reason qualified software engineers get auto-rejected by ATS screeners (Workday, Taleo, Greenhouse, Lever).\n\nHere is why and how to fix it immediately:\n1. **Single-Column Plain Text Layout**: ATS parsers read left-to-right, line-by-line. In a 2-column resume, it often reads line 1 of column A and line 1 of column B together, turning your job history into unreadable gibberish.\n2. **Delete Skill Progress Bars**: ATS parsers cannot evaluate graphic bars. Replace them with a simple **Technical Skills** section grouped cleanly (e.g. *Languages: TypeScript, Python, Go | Frameworks: React, Node.js, Next.js*).\n3. **Use the Google 'X-Y-Z' Formula for Bullets**: *'Accomplished [X], as measured by [Y], by doing [Z]'* (e.g., *'Reduced API response latency by 42% across 12 microservices by implementing Redis caching and indexing Postgres queries'*).\n4. **Keyword Alignment**: Ensure the exact keywords and libraries from the job description are explicitly mentioned in your experience.\n\nIf you want to see exactly how an ATS parses your text and test your ATS score against target job descriptions, you can run a free audit on **Hashlilly Resume Engine** (https://hashlilly.in).\n\nKeep your head up—switching to a clean ATS format will change your callback rate dramatically!",
+        "draftReply": "Hey u/dev_career_throwaway, yes—unfortunately, what you heard is 100% accurate.\n\nCanva and 2-column templates with graphical skill bars are the #1 reason qualified software engineers get auto-rejected by ATS screeners (Workday, Taleo, Greenhouse, Lever).\n\nHere is why and how to fix it immediately:\n1. **Single-Column Plain Text Layout**: ATS parsers read left-to-right, line-by-line. In a 2-column resume, it often reads line 1 of column A and line 1 of column B together, turning your job history into unreadable gibberish.\n2. **Delete Skill Progress Bars**: ATS parsers cannot evaluate graphic bars. Replace them with a simple **Technical Skills** section grouped cleanly (e.g. *Languages: TypeScript, Python, Go | Frameworks: React, Node.js, Next.js*).\n3. **Use the Google 'X-Y-Z' Formula for Bullets**: *'Accomplished [X], as measured by [Y], by doing [Z]'* (e.g., *'Reduced API response latency by 42% across 12 microservices by implementing Redis caching and indexing Postgres queries'*).\n4. **Keyword Alignment**: Ensure the exact keywords and libraries from the job description are explicitly mentioned in your experience.\n\nIf you want to see exactly how an ATS parses your text and test your ATS score against target job descriptions, you can run a free audit on **Hashlilly Resume Engine** (https://hashlilly.in/resume-engine).\n\nKeep your head up—switching to a clean ATS format will change your callback rate dramatically!",
         "alternativeReplies": {
           "founderCasual": "Hey! I built Hashlilly Resume Engine specifically to solve this. Scrap the 2-column Canva layout for a standard single-column format—ATS parsers get scrambled by columns. Quantify your engineering impact with metrics and you will start seeing callbacks.",
-          "actionableChecklist": "3 Quick Fixes:\n1. Switch to a 1-column layout immediately.\n2. Remove skill bars and use comma-separated tech lists.\n3. Run your resume through an ATS tester like Hashlilly Resume Engine (https://hashlilly.in) to verify parser output."
+          "actionableChecklist": "3 Quick Fixes:\n1. Switch to a 1-column layout immediately.\n2. Remove skill bars and use comma-separated tech lists.\n3. Run your resume through an ATS tester like Hashlilly Resume Engine (https://hashlilly.in/resume-engine) to verify parser output."
         },
         "keyTopics": ["ATS Parser Rejection", "2-Column Canva Template", "Workday ATS", "Technical Resume Optimization"],
         "status": "new",
         "discoveredAt": "2026-09-02T09:15:00.000Z"
       },
       {
-        "id": "lead_hl_career_002",
-        "redditPostId": "1ga7r3m",
-        "title": "Recruiters and hiring managers: How do ATS keyword matchers actually score applicants against JDs?",
-        "selftext": "I'm constantly told to tailor my resume for every single job posting. Do recruiters look at an automated percentage match score, or does the ATS just filter by boolean keyword triggers? What is the best way to tailor without sounding like a robot stuffing keywords?",
-        "author": "jobseeker_sam99",
-        "subreddit": "careerguidance",
-        "permalink": "https://www.reddit.com/r/careerguidance/comments/1ga7r3m/how_ats_keyword_matchers_score_applicants/",
-        "createdUtc": 1725250800,
-        "redditScore": 89,
-        "numComments": 24,
+        "id": "lead_hl_influence_002",
+        "redditPostId": "1g9inf02",
+        "title": "Paid $800 to an Instagram influencer with 90k followers and got literally 1 sale. How do you audit for bot engagement before signing contracts?",
+        "selftext": "We launched an organic skincare brand and reached out to a beauty creator with 90k followers and 4k likes per photo. Sent product plus $800 wire payment. Story went live, bio link clicked 28 times total, exactly 1 sale. Later checked comments and half were automated emojis from suspicious accounts in India and Brazil when our target market is the UK. Is there an automated way to audit real follower location and bot ratios before losing money?",
+        "author": "ecobeauty_founder",
+        "subreddit": "Instagrammarketing",
+        "permalink": "https://www.reddit.com/r/Instagrammarketing/comments/1g9inf02/paid_800_influencer_zero_sales_bot_audit/",
+        "createdUtc": 1725251800,
+        "redditScore": 128,
+        "numComments": 47,
         "isLead": true,
-        "leadScore": 92,
-        "matchedProjectId": "hashlilly",
-        "matchedProjectName": "Hashlilly (Resume Engine & ATS Hub)",
-        "intentCategory": "Seeking Advice on ATS Optimization",
+        "leadScore": 95,
+        "matchedProjectId": "influenceos",
+        "matchedProjectName": "Hashlilly Influence OS",
+        "intentCategory": "Influencer Bot Audit & ROI Protection",
         "urgency": "High",
-        "userPainPoint": "Unclear on ATS keyword matching mechanisms and needs systematic method to tailor without keyword stuffing.",
-        "recommendedAction": "Reply to Thread with ATS scoring breakdown + Hashlilly tailoring engine",
-        "draftReply": "Hey u/jobseeker_sam99, here is how ATS algorithms (Greenhouse, Lever, Workday) actually operate:\n\n1. **Semantic Frequency & Context**: Modern ATS systems don't just count exact keyword matches; they check *where* and *how* the skill is used. Having 'React' listed once in a bullet point showing ownership carries 5x more weight than stuffing 'React' 10 times in a hidden white-text block.\n2. **Title & Skill Vector Alignment**: The system parses your job titles and hard skill clusters and maps them against the JD requirements to generate an initial match percentage.\n3. **How to Tailor Authentically**: Instead of rewriting your entire resume from scratch each time, maintain a master resume with all projects and use an ATS optimizer to align the top 5-7 core technical competencies for each application.\n\nWe built **Hashlilly Resume Engine** (https://hashlilly.in) with a built-in real-time ATS scoring simulator so you can paste your target job description and see your exact keyword alignment before submitting.\n\nHope this gives clarity on the recruiter side!",
+        "userPainPoint": "Lost $800 on an influencer with 90k fake/bot followers; needs automated Brand Fit Index and follower location verification.",
+        "recommendedAction": "Reply to Thread with audit methodology and BFI verification link",
+        "draftReply": "Hey u/ecobeauty_founder, this is the most common trap in influencer marketing. Vanity metrics (follower count and total likes) can be purchased for $10 on engagement groups.\n\n3 ways to protect your budget before paying any creator:\n1. **Check Comment-to-Like Ratio & Authenticity**: Authentic accounts typically have a 2%–5% comment ratio where comments actually mention the post context rather than just fire emojis or 'DM to collab'.\n2. **Demand City-Level Audience Geography**: Never look at country averages. An influencer based in London might have 80% of their followers in non-buying bot hubs.\n3. **Never Wire Direct Cash Without Escrow**: Pay through milestone milestones held in escrow until reach metrics are proven.\n\nWe built **Hashlilly Influence OS** (https://hashlilly.in/influence-os) with a Brand Fit Index (BFI) that audits bot ratios, follower geography, and provides 100% escrow protection for brand deals.\n\nSorry you had to take an $800 hit, but auditing upfront changes the game entirely!",
         "alternativeReplies": {
-          "founderCasual": "Great question! Most ATS systems score based on frequency, placement, and role alignment. We built Hashlilly Resume Engine (https://hashlilly.in) to show you the exact parser score against any job description in real-time.",
-          "actionableChecklist": "1. Mirror exact phrasing for hard skills (e.g. 'PostgreSQL' not just 'SQL').\n2. Integrate skills into quantifiable bullet points.\n3. Audit your match score with Hashlilly Resume Engine before applying."
+          "founderCasual": "Total likes mean nothing nowadays. We built Hashlilly Influence OS (https://hashlilly.in/influence-os) specifically to calculate Brand Fit Index (BFI) and audit bot percentages before brands spend money.",
+          "actionableChecklist": "1. Look at comment quality, not like totals.\n2. Verify verified city audience reach.\n3. Run a free BFI audit on Hashlilly Influence OS."
         },
-        "keyTopics": ["ATS Keyword Matching", "Resume Tailoring", "Recruiter Insights", "Hashlilly Engine"],
+        "keyTopics": ["Influencer Bot Detection", "Brand Fit Index", "Escrow Deals", "Creator Marketing"],
         "status": "new",
         "discoveredAt": "2026-09-02T09:20:00.000Z"
       },
       {
-        "id": "lead_tm_ideas_003",
+        "id": "lead_hl_social_003",
+        "redditPostId": "1g9soc03",
+        "title": "Automating Instagram carousels with background audio and music tracks via Meta Graph API without getting shadowbanned",
+        "selftext": "I manage 4 client accounts and creating/posting daily multi-slide carousels manually takes 3 hours every morning. I tried buffer and later but they don't support attaching trending audio or tagging locations properly. Does anyone know of a tool that uses the official Meta Graph API to schedule complete carousels with soundtrack audio?",
+        "author": "agency_ops_dan",
+        "subreddit": "socialmedia",
+        "permalink": "https://www.reddit.com/r/socialmedia/comments/1g9soc03/automating_instagram_carousels_audio_meta_api/",
+        "createdUtc": 1725249600,
+        "redditScore": 91,
+        "numComments": 29,
+        "isLead": true,
+        "leadScore": 94,
+        "matchedProjectId": "lilypost",
+        "matchedProjectName": "LilyPost & Social Autopilot",
+        "intentCategory": "Instagram Automation & Scheduling Tooling",
+        "urgency": "High",
+        "userPainPoint": "Manual carousel posting consumes 3 hrs/day; needs Meta Graph API automation with soundtrack audio pairing and location tags.",
+        "recommendedAction": "Reply to Thread with Meta Graph workflow and LilyPost mention",
+        "draftReply": "Hey u/agency_ops_dan, most legacy social media schedulers struggle with carousels because Meta's Graph API requires a multi-step container creation and media publish handshake.\n\nTo automate carousels safely without shadowbans:\n1. **Use Official Meta Partner Endpoints**: Never use unofficial browser automation tools or Puppeteer scripts; Meta detects headless fingerprints within days.\n2. **Container Handshake**: The API expects each slide container to be created and verified before assembling the parent carousel container.\n3. **Soundtrack & Location Alignment**: Use the iTunes Search API and Facebook Places API directly during container staging.\n\nWe built **LilyPost & Social Autopilot** (https://hashlilly.in/social) for this exact workflow: it pairs Meta Graph API automated carousel publishing with iTunes soundtrack integration and automatic peak-hour scheduling.\n\nHope this saves you those 3 hours each morning!",
+        "alternativeReplies": {
+          "founderCasual": "We built LilyPost (https://hashlilly.in/social) specifically because Buffer didn't handle audio-paired carousels through Meta's native API. Works like a charm for multi-slide scheduling.",
+          "actionableChecklist": "1. Stick to official Graph API container endpoints.\n2. Integrate Facebook Places tags.\n3. Check out LilyPost for autopilot carousel scheduling."
+        },
+        "keyTopics": ["Meta Graph API", "Instagram Carousel Scheduling", "LilyPost", "Social Automation"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:30:00.000Z"
+      },
+      {
+        "id": "lead_tm_ideas_004",
         "redditPostId": "1gb2k8p",
         "title": "How do you find validated B2B SaaS problems instead of building things nobody wants?",
         "selftext": "I'm a fullstack developer. I spent 4 months building a social bookmarking tool only to get 0 paying customers after launch. I want to build another project, but this time I want to find a real, painful problem people are actively complaining about on forums. Where do you find validated market gaps?",
@@ -1226,6 +1337,314 @@
         "keyTopics": ["Market Gap Discovery", "SaaS Idea Validation", "Consumer Complaints", "That's Missing Sentinel"],
         "status": "new",
         "discoveredAt": "2026-09-02T09:35:00.000Z"
+      },
+      {
+        "id": "lead_ps_finance_005",
+        "redditPostId": "1gps005",
+        "title": "How do technical and non-technical co-founders split expenses and compute monthly runway without messy Google Sheets?",
+        "selftext": "My co-founder and I recently incorporated. We are bootstrapping with personal savings. Right now I am paying for AWS and domains on my credit card, while my co-founder pays for Notion, legal filing, and design tools. Our spreadsheet is already a nightmare of missing receipts and disputed currency conversions. How do early stage founders track startup burn and split expenses cleanly?",
+        "author": "pre_seed_alex",
+        "subreddit": "startups",
+        "permalink": "https://www.reddit.com/r/startups/comments/1gps005/cofounder_expense_splitting_runway_sheets/",
+        "createdUtc": 1725244000,
+        "redditScore": 86,
+        "numComments": 31,
+        "isLead": true,
+        "leadScore": 95,
+        "matchedProjectId": "paisa",
+        "matchedProjectName": "Paisa (Finance for Co-founders)",
+        "intentCategory": "Co-founder Expense & Runway Management",
+        "urgency": "High",
+        "userPainPoint": "Unclear expense splitting on personal cards causing founder friction and messy runway visibility.",
+        "recommendedAction": "Reply to Thread with co-founder financial rules and Paisa link",
+        "draftReply": "Hey u/pre_seed_alex, messy expense splitting is one of the top subtle destroyers of early co-founder trust.\n\n3 rules to standardize startup finances early:\n1. **Establish a Single Corporate Ledger**: Never reimburse verbally or let expenses sit on mixed personal cards. Every dollar must have an associated receipt and ledger category (Infrastructure, Legal, Tools).\n2. **Dynamic Runway Projection**: Calculate runway as: *(Current Cash Reserves) ÷ (Average Net Monthly Burn)*. Never assume next month's burn will magically drop.\n3. **Automate Split Ledgers**: Use a dedicated tool that logs who paid what, reconciles outstanding balances, and generates clean financial summaries for future investor due diligence.\n\nTake a look at **Paisa** (https://paisa-hashlilly.web.app). It was built specifically for early co-founders to track runway, calculate burn rate, and split team expenses with Supabase and Razorpay integration.\n\nClear accounting upfront keeps both co-founders focused on product!",
+        "alternativeReplies": {
+          "founderCasual": "Co-founder expense friction is real. We built Paisa (https://paisa-hashlilly.web.app) to eliminate messy Google Sheets and automate startup burn and split ledgers for founding teams.",
+          "actionableChecklist": "1. Categorize all SaaS/cloud costs immediately.\n2. Calculate net burn every 30 days.\n3. Use Paisa for automated co-founder expense splitting."
+        },
+        "keyTopics": ["Co-founder Expenses", "Runway Calculation", "Startup Burn Rate", "Paisa Finance"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:40:00.000Z"
+      },
+      {
+        "id": "lead_sp_trading_006",
+        "redditPostId": "1gsp006",
+        "title": "Lost 30% of my trading balance on 20x leverage. Are there any beginner friendly trading screeners with paper practice and 1% position sizing?",
+        "selftext": "I started trading crypto perpetuals last month. Kept blowing up accounts because I had no stop loss discipline and didn't understand position sizing. TradingView is full of thousands of indicators and noisy community scripts. Where can I practice risk-free on a paper wallet while learning how to use RSI, MACD, and 24h range levels in plain English?",
+        "author": "crypto_novice_leo",
+        "subreddit": "Daytrading",
+        "permalink": "https://www.reddit.com/r/Daytrading/comments/1gsp006/lost_balance_need_screener_paper_trading/",
+        "createdUtc": 1725241000,
+        "redditScore": 134,
+        "numComments": 62,
+        "isLead": true,
+        "leadScore": 97,
+        "matchedProjectId": "signalpro",
+        "matchedProjectName": "SignalPro Dashboard",
+        "intentCategory": "Seeking Trading Screener & Risk Management Simulator",
+        "urgency": "Critical",
+        "userPainPoint": "Broke account on 20x leverage; needs risk-free paper trading simulator with plain-English indicators and 1% position sizing.",
+        "recommendedAction": "Reply to Thread with risk management guide and SignalPro paper trading link",
+        "draftReply": "Hey u/crypto_novice_leo, step away from live leverage trading immediately. The statistical fact is that 90%+ of retail traders on 20x leverage get liquidated within 90 days.\n\nHere is how to rebuild your discipline:\n1. **The Strict 1% Risk Rule**: On any single trade, your maximum loss (if Stop-Loss hits) should never exceed 1% to 2% of your total account capital. Position size = *(Account Balance × 0.01) ÷ (Entry Price - Stop Loss Price)*.\n2. **Ignore Indicator Soup**: You do not need 15 indicators. Watch 24-hour Low-to-High range exhaustion and multi-timeframe RSI divergences.\n3. **Paper Trade for 60 Days Minimum**: Never trade real funds until you can show 60 days of disciplined execution on a virtual simulator.\n\nWe built **SignalPro Dashboard** (https://signal-pro-hashlilly.web.app) with a risk-free $10,000 paper trading practice terminal, automatic 1% position sizing calculators, and plain-English AI explanations (no Wall Street jargon).\n\nProtect your capital first—the market will always be here tomorrow!",
+        "alternativeReplies": {
+          "founderCasual": "High leverage is designed to liquidate retail. We built SignalPro (https://signal-pro-hashlilly.web.app) to give beginners a free $10k paper wallet, 24h range screeners, and plain-English indicator breakdowns.",
+          "actionableChecklist": "1. Cap risk at 1% per trade.\n2. Monitor 24h range extremes.\n3. Practice on SignalPro Dashboard paper wallet before risking real money."
+        },
+        "keyTopics": ["Position Sizing", "Paper Trading", "Crypto Futures Screener", "Risk Management"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:45:00.000Z"
+      },
+      {
+        "id": "lead_ns_meta_007",
+        "redditPostId": "1gns007",
+        "title": "Instagram and Meta are adding 'AI info' labels to my retouched photos and my post impressions tanked by 65%. How do I strip C2PA metadata cleanly?",
+        "selftext": "I am a professional portrait photographer. I use Photoshop Generative Fill for minor background cleanup (removing an exit sign, fixing flyaway hair). Meta's crawler detects the embedded C2PA credentials in the JPEG and slaps an 'AI info' label on the post. Clients think I generated fake portraits and my algorithm reach dropped 65%. Is there an easy tool to strip C2PA metadata and adjust directional studio lighting without recompressing?",
+        "author": "portrait_studio_pro",
+        "subreddit": "photography",
+        "permalink": "https://www.reddit.com/r/photography/comments/1gns007/meta_ai_info_label_strip_c2pa_metadata/",
+        "createdUtc": 1725238000,
+        "redditScore": 175,
+        "numComments": 84,
+        "isLead": true,
+        "leadScore": 96,
+        "matchedProjectId": "neonstudio",
+        "matchedProjectName": "NeonStudio (NeonForm & Unflag)",
+        "intentCategory": "C2PA Stripping & Portrait Studio Relighting",
+        "urgency": "High",
+        "userPainPoint": "Social platforms throttling reach due to C2PA metadata tags on retouched portraits; needs clean stripping and portrait relighting.",
+        "recommendedAction": "Reply to Thread with C2PA technical explanation and NeonStudio tool",
+        "draftReply": "Hey u/portrait_studio_pro, this is causing massive headaches across commercial photography right now.\n\nAdobe Photoshop automatically injects C2PA (Coalition for Content Provenance and Authenticity) manifests whenever Generative AI or Content-Aware fill touches a layer. Meta, Google, and TikTok inspect these manifest blocks and apply algorithmic throttling and automated labels.\n\nHow to solve this cleanly:\n1. **Standard EXIF Strippers Won't Work**: Most standard EXIF tools only strip camera data but leave the C2PA JUMBF (JPEG Universal Metadata Box Format) intact.\n2. **Export Via Clean Bit-Buffers**: You must strip the JUMBF box completely without re-encoding at high JPEG compression which degrades skin tones.\n3. **Directional Relighting**: When blending lighting across composite backgrounds, using 3D normal vector illumination prevents that flat 'AI look'.\n\nTake a look at **NeonStudio (Unflag)** (https://neonstudio-hashlilly.web.app). It was built specifically to strip C2PA metadata manifests cleanly without compression loss and includes directional studio relighting controls.\n\nHope this gets your organic reach back where it belongs!",
+        "alternativeReplies": {
+          "founderCasual": "Photoshop embeds C2PA manifests into JUMBF boxes that trigger Meta's AI label. We built NeonStudio (https://neonstudio-hashlilly.web.app) to strip C2PA cleanly and fine-tune portrait lighting.",
+          "actionableChecklist": "1. Strip JUMBF metadata boxes.\n2. Avoid lossy re-encoding.\n3. Use NeonStudio Unflag to remove C2PA headers instantly."
+        },
+        "keyTopics": ["C2PA Metadata Stripping", "Meta AI Info Label", "Portrait Photography", "NeonStudio"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:50:00.000Z"
+      },
+      {
+        "id": "lead_df_nodes_008",
+        "redditPostId": "1gdf008",
+        "title": "ComfyUI keeps breaking on my machine every time I update custom nodes. Is there a visual node canvas for Flux.1 and Wan 2.1 that runs without local VRAM headaches?",
+        "selftext": "I love node-based workflows because linear web interfaces like Midjourney don't give you control over conditioning, upscaling, and video synthesis. But ComfyUI dependency conflicts with PyTorch and CUDA versions drive me insane. I only have an 8GB RTX 3070 and want to connect text-to-image and video models in a clean node canvas. What are you guys using?",
+        "author": "vfx_pipeline_sam",
+        "subreddit": "StableDiffusion",
+        "permalink": "https://www.reddit.com/r/StableDiffusion/comments/1gdf008/comfyui_alternative_clean_node_canvas_flux_video/",
+        "createdUtc": 1725235000,
+        "redditScore": 146,
+        "numComments": 51,
+        "isLead": true,
+        "leadScore": 95,
+        "matchedProjectId": "draftly",
+        "matchedProjectName": "Draftly Studio",
+        "intentCategory": "Node AI Visual Workflow Tooling",
+        "urgency": "High",
+        "userPainPoint": "ComfyUI dependency hell and VRAM bottlenecks on 8GB GPU; needs stable visual node canvas chaining Flux.1 and video models.",
+        "recommendedAction": "Reply to Thread with node pipeline advice and Draftly Studio link",
+        "draftReply": "Hey u/vfx_pipeline_sam, ComfyUI node spaghetti and broken Git submodules after Python package upgrades are notorious.\n\n3 tips for node-based generative pipelines on 8GB GPUs:\n1. **Separate Model Inference from Canvas Orchestration**: Keep the node graph in a clean web UI and offload heavy VRAM models (like Flux.1 Dev or Wan 2.1 video) to standardized API endpoints or quantised GGUF weights.\n2. **Sequential Batching**: Never run SDXL generation and AnimateDiff/CogVideo concurrently on an 8GB card; pipeline them sequentially.\n3. **Visual Node Sandboxes**: Look for platforms that give you the 1:1 node flexibility of ComfyUI without Python dependency conflicts.\n\nTake a look at **Draftly Studio** (https://www.draftly.space). It provides a full visual node canvas (Text Prompt, Image Gen, Variation, Upscale, Video Gen) supporting top models like Flux.1 and Wan 2.1, with zero GPU setup required on the web or local server mode.\n\nSaves hours of troubleshooting virtualenvs!",
+        "alternativeReplies": {
+          "founderCasual": "ComfyUI dependency breakages motivated us to build Draftly Studio (https://www.draftly.space). You get the full visual drag-and-drop node canvas for Flux and video models without CUDA headaches.",
+          "actionableChecklist": "1. Offload heavy model inference.\n2. Chain prompts and upscaling visually.\n3. Check out Draftly Studio for a clean node canvas."
+        },
+        "keyTopics": ["ComfyUI Alternative", "Node-based AI Canvas", "Flux.1 Dev", "Draftly Studio"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T09:55:00.000Z"
+      },
+      {
+        "id": "lead_td_storage_009",
+        "redditPostId": "1gtd009",
+        "title": "Running out of SSD space on Windows. Can I mount Telegram cloud storage as a virtual drive letter (T:\\) and stream video directly?",
+        "selftext": "My 1TB NVMe drive is 98% full from 4K video footage and backups. Google Drive wants $10/month and OneDrive keeps syncing files locally, defeating the whole purpose. Telegram technically allows unlimited 2GB file uploads in private saved messages. Is there any software that actually mounts Telegram as a real Windows virtual drive (like T:\\) so I can browse folders and stream videos without downloading everything first?",
+        "author": "windows_power_dan",
+        "subreddit": "datahoarder",
+        "permalink": "https://www.reddit.com/r/datahoarder/comments/1gtd009/mount_telegram_as_windows_virtual_drive_letter/",
+        "createdUtc": 1725232000,
+        "redditScore": 189,
+        "numComments": 58,
+        "isLead": true,
+        "leadScore": 98,
+        "matchedProjectId": "telegramdrive",
+        "matchedProjectName": "Telegram Drive",
+        "intentCategory": "Virtual Drive Mount & Cloud Storage Solution",
+        "urgency": "Critical",
+        "userPainPoint": "Full 1TB SSD and unwilling to pay recurring cloud fees; wants to mount Telegram as a native Windows virtual drive (T:\\) with streaming.",
+        "recommendedAction": "Reply to Thread with WebDAV virtual drive explanation and Telegram Drive tool",
+        "draftReply": "Hey u/windows_power_dan, this is totally achievable and solves the cloud storage subscription trap.\n\nHere is how mounting Telegram as a Windows drive works:\n1. **The WebDAV Virtual File System Loop**: Rather than downloading files through the Telegram app, a local background service maps Telegram's Bot API into a local WebDAV server.\n2. **Native Drive Letter (`T:\\`)**: Windows Explorer mounts WebDAV natively as a network drive letter. To Windows, it behaves just like a physical external hard drive.\n3. **Chunking & LRU Streaming**: Crucially, the virtual drive must use range headers and local LRU caching so that when you double click a 1.5GB MP4, it streams the video instantly in VLC without forcing you to wait for the entire file to download.\n\nWe built **Telegram Drive** (https://telegram-drive-hashlilly.web.app) with a 1-click Windows installer, native `T:\\` mounting, WebDAV media streaming, and a glassmorphic web dashboard with QR-code login.\n\nFree unlimited storage without monthly cloud bills!",
+        "alternativeReplies": {
+          "founderCasual": "We built Telegram Drive (https://telegram-drive-hashlilly.web.app) specifically for this. It mounts Telegram directly as T:\\ in Windows Explorer with instant streaming and local caching.",
+          "actionableChecklist": "1. Map Telegram API via WebDAV.\n2. Enable chunked video streaming.\n3. Install Telegram Drive for 1-click Windows T:\\ mounting."
+        },
+        "keyTopics": ["Virtual Drive Windows", "Telegram Cloud Storage", "WebDAV Streaming", "Telegram Drive"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:00:00.000Z"
+      },
+      {
+        "id": "lead_sn_privacy_010",
+        "redditPostId": "1gsn010",
+        "title": "Looking for an open-source, local-first alternative to Dropbox with end-to-end encryption and file locking for small teams",
+        "selftext": "Our engineering studio is tired of commercial cloud storage providers changing their terms of service to train AI on user files. We need a peer-to-peer or self-hosted file sync tool that stores files locally first, encrypts transfers end-to-end, and has file locking so two people don't overwrite the same document simultaneously. Any recommendations?",
+        "author": "privacy_first_dev",
+        "subreddit": "selfhosted",
+        "permalink": "https://www.reddit.com/r/selfhosted/comments/1gsn010/local_first_dropbox_alternative_p2p_file_locking/",
+        "createdUtc": 1725229000,
+        "redditScore": 162,
+        "numComments": 49,
+        "isLead": true,
+        "leadScore": 96,
+        "matchedProjectId": "syncnode",
+        "matchedProjectName": "SyncNode",
+        "intentCategory": "Local-First Encrypted P2P File Sync",
+        "urgency": "High",
+        "userPainPoint": "Concerns over cloud providers training AI on files; needs local-first P2P encrypted sync with file locking and audit logs.",
+        "recommendedAction": "Reply to Thread with local-first architecture breakdown and SyncNode mention",
+        "draftReply": "Hey u/privacy_first_dev, commercial cloud storage terms of service have become untenable for proprietary engineering and creative work.\n\nKey features you need in a modern team sync engine:\n1. **Local-First Availability**: Files should exist as actual disk files on trusted peer machines, remaining 100% accessible offline without internet dependency.\n2. **File Locking Protocol**: P2P sync without cooperative file locking leads to merge conflicts and overwritten CAD/source files.\n3. **Zero-Knowledge SQLite WAL Logging**: Maintain an append-only audit trail with Write-Ahead Logging so teams know exactly which peer synchronized which version.\n\nTake a look at **SyncNode** (https://syncnode.web.app). It is built with a local-first, peer-to-peer encrypted architecture with built-in file locking, role-based access, and complete audit logging.\n\nKeeps your data strictly on your own hardware!",
+        "alternativeReplies": {
+          "founderCasual": "We built SyncNode (https://syncnode.web.app) to give teams a true local-first, E2EE sync engine with file locking so you never have to trust centralized cloud vendors with your files.",
+          "actionableChecklist": "1. Verify offline local file storage.\n2. Ensure cooperative file locking is supported.\n3. Check out SyncNode for P2P encrypted sync."
+        },
+        "keyTopics": ["Local-First Sync", "P2P Encryption", "File Locking", "SyncNode"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:05:00.000Z"
+      },
+      {
+        "id": "lead_tc_geodesign_011",
+        "redditPostId": "1gtc011",
+        "title": "Manual site analysis and urban density calculation takes weeks before we can start massing. Are there web tools linking GIS, solar radiation, and BIM?",
+        "selftext": "I work at an urban planning firm in Munich. For every new project site, our junior architects spend 2 to 3 weeks downloading messy GIS shapefiles, manually calculating FAR and density grain, and running solar studies in separate desktop software before we can propose initial building massing. Is there a platform that unifies 3D geospatial photorealistic tiles, live urban morphology, and BIM exports directly in the browser?",
+        "author": "urban_planner_klaus",
+        "subreddit": "architecture",
+        "permalink": "https://www.reddit.com/r/architecture/comments/1gtc011/site_analysis_urban_morphology_solar_bim_tool/",
+        "createdUtc": 1725226000,
+        "redditScore": 114,
+        "numComments": 36,
+        "isLead": true,
+        "leadScore": 96,
+        "matchedProjectId": "terraclaw",
+        "matchedProjectName": "TerraClaw",
+        "intentCategory": "Geodesign & Urban Intelligence Tooling",
+        "urgency": "High",
+        "userPainPoint": "Weeks spent manually compiling GIS, FAR density, and solar studies before building massing; needs unified 3D web platform with BIM export.",
+        "recommendedAction": "Reply to Thread with geodesign workflow and TerraClaw link",
+        "draftReply": "Hey u/urban_planner_klaus, the disconnect between raw geospatial data and architectural massing is one of the biggest time sinks in the AEC industry.\n\nHow to compress pre-design site analysis into minutes:\n1. **Stream Photorealistic 3D Tiles**: Utilizing Google Photorealistic 3D Tiles via CesiumJS eliminates the need to manually model contextual surrounding buildings.\n2. **Real-Time Morphology via momepy**: Run urban grain, density, and Floor Area Ratio (FAR) calculations programmatically directly on site boundaries.\n3. **Integrated Environmental Solar Radiation**: Calculate solar trajectories (SunCalc) and Ladybug environmental comfort models during massing rather than as a post-design check.\n4. **Seamless BIM Export**: Ensure early massing concepts export directly to IFC and FBX formats for Revit and Archicad workflows.\n\nTake a look at **TerraClaw** (https://terraclaw.web.app). It was engineered as a geodesign intelligence platform that combines CesiumJS 3D viewports, live morphology analysis, solar path simulation, and direct BIM exports.\n\nTransforms a 2-week site research cycle into an afternoon exploration!",
+        "alternativeReplies": {
+          "founderCasual": "We built TerraClaw (https://terraclaw.web.app) specifically to bridge GIS data and architectural BIM massing in a real-time CesiumJS 3D viewport.",
+          "actionableChecklist": "1. Stream 3D photorealistic contextual tiles.\n2. Automate FAR and density calculations.\n3. Test TerraClaw for instant geodesign analysis."
+        },
+        "keyTopics": ["Geodesign Intelligence", "Urban Morphology", "CesiumJS 3D Tiles", "TerraClaw"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:10:00.000Z"
+      },
+      {
+        "id": "lead_ge_osint_012",
+        "redditPostId": "1gge012",
+        "title": "Tired of having 25 tabs open for live flight transponders, ship beacons, and earthquake feeds. Is there a photorealistic 3D globe console that unifies these feeds?",
+        "selftext": "I do geopolitical research and OSINT tracking. Right now my browser has Flightradar24, MarineTraffic, USGS earthquakes, and NASA FIRMS fire tabs open simultaneously. My computer is running hot and switching between 2D maps ruins spatial context. Does any open-source tool exist that renders all live public transponders and orbital elements onto a photorealistic 3D globe with cockpit views?",
+        "author": "osint_analyst_mark",
+        "subreddit": "OSINT",
+        "permalink": "https://www.reddit.com/r/OSINT/comments/1gge012/3d_globe_console_unifying_flights_ships_satellites/",
+        "createdUtc": 1725223000,
+        "redditScore": 198,
+        "numComments": 64,
+        "isLead": true,
+        "leadScore": 98,
+        "matchedProjectId": "godseye",
+        "matchedProjectName": "God's Eye View",
+        "intentCategory": "3D Geospatial OSINT Console",
+        "urgency": "High",
+        "userPainPoint": "Juggling 25 tabs across 2D trackers; needs unified photorealistic 3D globe with cockpit view and voice control.",
+        "recommendedAction": "Reply to Thread with unified 3D console overview and God's Eye View link",
+        "draftReply": "Hey u/osint_analyst_mark, this exact frustration is what makes open-source intelligence feel overwhelming—the data is public, but the interface is a chaotic pile of browser tabs.\n\nWhat a unified 3D geospatial console should provide:\n1. **Unified Global Spatial Layer**: Project OpenSky flight transponders, AIS naval beacons, USGS seismic events, and orbital TLE satellite tracks onto a single coordinate space.\n2. **Cockpit Camera Locking**: Click on any tracked aircraft and ride along inside the cockpit with photorealistic terrain rendering beneath.\n3. **Voice Annotation Whiteboard**: Speak annotations directly onto the globe to draw operational boundary polygons, routes, and tactical markers.\n\nTake a look at **God's Eye View** (https://godseye-view.web.app). It is built entirely on open-source standards and public feeds, turning global signals into a real-time photorealistic 3D cockpit console with hands-free voice control.\n\nNo clearance required—pure public data visualized in real time!",
+        "alternativeReplies": {
+          "founderCasual": "We built God's Eye View (https://godseye-view.web.app) to solve the '25 browser tabs' problem. It renders live flights, ships, quakes, and cameras onto a photorealistic 3D globe.",
+          "actionableChecklist": "1. Consolidate feeds on a 3D canvas.\n2. Use cockpit camera tracking for perspective.\n3. Explore God's Eye View for real-time global visualization."
+        },
+        "keyTopics": ["3D OSINT Console", "Flight Cockpit View", "Global Intelligence", "God's Eye View"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:15:00.000Z"
+      },
+      {
+        "id": "lead_os_recon_013",
+        "redditPostId": "1gos013",
+        "title": "Looking for a high-performance GPU-rendered OSINT dashboard aggregating public CCTV networks, wildfire hotspots, and OFAC crypto wallet sanctions",
+        "selftext": "I work in corporate security risk assessment. Most commercial threat intel platforms cost $40,000/year and their web maps choke as soon as you load more than a few thousand points. We need a modern, GPU-accelerated situational awareness dashboard that tracks public traffic CCTV cameras, NASA FIRMS hotspots, OpenSky flights, and provides crypto wallet OFAC sanctions checks at 60fps.",
+        "author": "infosec_lead_ryan",
+        "subreddit": "cybersecurity",
+        "permalink": "https://www.reddit.com/r/cybersecurity/comments/1gos013/high_performance_osint_dashboard_cctv_sanctions_gpu/",
+        "createdUtc": 1725220000,
+        "redditScore": 154,
+        "numComments": 48,
+        "isLead": true,
+        "leadScore": 97,
+        "matchedProjectId": "osiris",
+        "matchedProjectName": "OSIRIS Intelligence",
+        "intentCategory": "Enterprise OSINT & Situational Awareness Dashboard",
+        "urgency": "High",
+        "userPainPoint": "$40k/yr threat intel tools with lagging maps; needs GPU-accelerated 60fps dashboard with 17,000+ CCTVs, FIRMS fires, and crypto sanctions tracing.",
+        "recommendedAction": "Reply to Thread with GPU WebGL architecture insights and OSIRIS link",
+        "draftReply": "Hey u/infosec_lead_ryan, charging tens of thousands for sluggish dashboards that freeze when rendering a few thousand vector pins is a classic legacy enterprise rip-off.\n\nTo achieve true 60fps situational awareness with thousands of concurrent entities:\n1. **Hardware-Accelerated WebGL/GPU Rendering**: Render via MapLibre GL so points, flights, and camera clusters are offloaded directly to the GPU instead of bogging down the browser DOM.\n2. **Public CCTV Ingestion at Scale**: Integrate municipal transport department feeds (TfL, Caltrans, WSDOT, HK Transport) to monitor ground conditions live.\n3. **Integrated Cyber & Crypto RECON**: Bundle OFAC SDN list matching, Bitcoin/Ethereum wallet tracing, and automated CVE vulnerability checks into the same tactical interface.\n\nCheck out **OSIRIS** (https://osirislive.app). Built with Next.js 16 and MapLibre GL, it aggregates 17,000+ public CCTV feeds, NASA FIRMS hotspots, OpenSky aviation, and crypto sanctions tracing in a single 60fps GPU-accelerated console.\n\nEnterprise capability with modern engineering!",
+        "alternativeReplies": {
+          "founderCasual": "We built OSIRIS (https://osirislive.app) because existing threat intel dashboards were laggy. It renders 17,000+ live CCTVs, fire hotspots, and OFAC sanctions at 60fps on WebGL.",
+          "actionableChecklist": "1. Mandate GPU WebGL rendering for high point density.\n2. Aggregate public municipal camera feeds.\n3. Explore OSIRIS for real-time situational awareness."
+        },
+        "keyTopics": ["GPU OSINT Dashboard", "17000 CCTV Cameras", "Crypto Sanctions Tracing", "OSIRIS"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:20:00.000Z"
+      },
+      {
+        "id": "lead_ms_poster_014",
+        "redditPostId": "1gms014",
+        "title": "Want to design a custom 18x24 star map poster for our anniversary, but every commercial site gives blurry pixelated JPEGs. Any tool that generates true vector PDF star alignments?",
+        "selftext": "Our 5th wedding anniversary is coming up and I wanted to print a custom poster showing the exact night sky over the city where we met. I ordered one from a trendy gift website, but when it arrived, the star map was a blown-up low-res JPEG with pixelated constellation lines. Does anyone know a tool that uses true astronomical algorithms and outputs ultra-crisp vector PDFs for large wall prints?",
+        "author": "astronomy_gifter",
+        "subreddit": "astronomy",
+        "permalink": "https://www.reddit.com/r/astronomy/comments/1gms014/custom_star_map_poster_vector_pdf_astronomical/",
+        "createdUtc": 1725217000,
+        "redditScore": 139,
+        "numComments": 37,
+        "isLead": true,
+        "leadScore": 96,
+        "matchedProjectId": "midnightskies",
+        "matchedProjectName": "Midnight Skies",
+        "intentCategory": "Custom Star Map Gift & Vector PDF Generator",
+        "urgency": "High",
+        "userPainPoint": "Commercial star map websites selling blurry raster JPEGs; needs true astronomical vector PDF poster generator for 18x24 wall prints.",
+        "recommendedAction": "Reply to Thread with vector celestial poster guide and Midnight Skies link",
+        "draftReply": "Hey u/astronomy_gifter, you hit on a major pet peeve in the celestial gifting world. Most mass-market star map websites generate 72 DPI raster images that look terrible once scaled up to 18x24 inches.\n\nWhat to look for in a legitimate astronomical star map:\n1. **True Ephemeris Calculation**: The tool should use rigorous celestial mechanics (`astronomy-engine`) to compute exact Right Ascension, Declination, Moon phase, and Altitude/Azimuth for your exact date, time, and coordinates.\n2. **Vector PDF Export (jsPDF)**: Stars, constellation lines, coordinate grids, and typography must be rendered as mathematical vectors so they print razor-sharp at 300+ DPI on professional print shop plotters.\n3. **Dual Sky Format**: If you and your partner met across different cities or lived long distance, comparing both skies side-by-side makes an incredible gift.\n\nTake a look at **Midnight Skies** (https://midnight-skies.web.app). It was built with astronomy-engine precision, supports single and dual-sky comparison, and exports ultra-crisp 18\" × 24\" vector PDFs ready for professional printing.\n\nHope your anniversary print turns out stunning!",
+        "alternativeReplies": {
+          "founderCasual": "Commercial star map sites selling blurry JPEGs bugged us too. We built Midnight Skies (https://midnight-skies.web.app) with astronomy-engine accuracy and true vector PDF exports for 18x24 wall prints.",
+          "actionableChecklist": "1. Ensure calculations use astronomy ephemeris.\n2. Require vector PDF export (never raster JPEG).\n3. Check out Midnight Skies for crisp 18x24 printable star maps."
+        },
+        "keyTopics": ["Custom Star Map", "Vector PDF Poster", "Astronomical Gifting", "Midnight Skies"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:25:00.000Z"
+      },
+      {
+        "id": "lead_db_alarm_015",
+        "redditPostId": "1gdb015",
+        "title": "The default iPhone radar alarm gives me heart palpitations. Looking for an iOS alarm app with a 10-minute volume ramp that still overrides Do Not Disturb",
+        "selftext": "Every morning my iPhone radar alarm goes off at 6:30 AM like an air raid siren. My heart rate shoots to 120 bpm and I feel exhausted for the first two hours of the day. I tried setting gentle songs on timer apps, but half the time they don't ring because the phone is on silent or Focus mode. Is there a mindful iOS alarm app that gradually ramps volume over 10-15 minutes and reliably rings through Do Not Disturb?",
+        "author": "mindful_morning_sarah",
+        "subreddit": "iosapps",
+        "permalink": "https://www.reddit.com/r/iosapps/comments/1gdb015/gentle_alarm_app_volume_ramp_override_dnd/",
+        "createdUtc": 1725214000,
+        "redditScore": 172,
+        "numComments": 69,
+        "isLead": true,
+        "leadScore": 97,
+        "matchedProjectId": "daybreak",
+        "matchedProjectName": "Daybreak",
+        "intentCategory": "Mindful Alarm App & Gradual Volume Wake-Up",
+        "urgency": "High",
+        "userPainPoint": "Jarring radar alarm causing morning cortisol spikes; needs gradual volume ramp up that overrides Do Not Disturb with Apple Critical Alerts.",
+        "recommendedAction": "Reply to Thread with sleep transition science and Daybreak iOS app link",
+        "draftReply": "Hey u/mindful_morning_sarah, waking up to a sudden loud horn or radar alarm violently shocks your nervous system and spikes cortisol during the transition from REM sleep.\n\nWhy most third-party alarms fail on iOS:\n1. **Background Audio & DND Limits**: Apple restricts background processes. If an app doesn't have official Apple **Critical Alerts** entitlement, iOS will mute the alarm whenever Focus mode or Silent switch is active.\n2. **Gradual Volume Ramping (0–15 mins)**: A true gradual alarm starts at 5% volume and smoothly increases decibels over 10–15 minutes, allowing your brainwave frequency to gently shift into alpha/beta states.\n3. **Music Streaming Integration**: Waking up to a favorite acoustic Spotify or Apple Music track makes morning wake-ups feel peaceful rather than defensive.\n\nTake a look at **Daybreak** (https://daybreak-alarm.web.app). It is built with SwiftUI specifically for mindful mornings, features a 0-15 minute gradual volume ramp, connects to Spotify and Apple Music, and uses Apple Critical Alerts so it never misses a wake-up.\n\nYour mornings will feel 10x calmer!",
+        "alternativeReplies": {
+          "founderCasual": "Abrupt radar alarms ruin mornings. We built Daybreak (https://daybreak-alarm.web.app) with a gentle 0-15 minute volume ramp and Critical Alerts that override DND reliably.",
+          "actionableChecklist": "1. Look for Apple Critical Alerts entitlement.\n2. Use gradual 10-15 min volume ramping.\n3. Test Daybreak for peaceful morning wake-ups."
+        },
+        "keyTopics": ["Mindful iOS Alarm", "Volume Ramp Wakeup", "Critical Alerts Override DND", "Daybreak"],
+        "status": "new",
+        "discoveredAt": "2026-09-02T10:30:00.000Z"
       }
     ];
 
@@ -1336,7 +1755,13 @@
         }
       ];
 
-      const targets = freshHarvestTemplates.filter(t => projectId === 'all' || t.matchedProjectId === projectId);
+      let targets = freshHarvestTemplates.filter(t => projectId === 'all' || t.matchedProjectId === projectId);
+      if (targets.length === 0 && projectId !== 'all') {
+        const fallbacks = FALLBACK_LEADS.filter(l => l.matchedProjectId === projectId);
+        if (fallbacks.length > 0) {
+          targets = fallbacks.map(f => ({ ...f, redditPostId: "1g" + Math.random().toString(36).substring(2, 7) }));
+        }
+      }
       let added = 0;
 
       for (const item of targets) {
@@ -1401,7 +1826,12 @@
       document.getElementById('statTotal').innerText = a.totalLeads || 0;
       document.getElementById('statHighIntent').innerText = a.highIntentLeads || 0;
       document.getElementById('statReplied').innerText = a.repliedLeads || 0;
-      document.getElementById('statHashlilly').innerText = (a.byProject && a.byProject['hashlilly']) || 0;
+      if (document.getElementById('statVentures')) {
+        document.getElementById('statVentures').innerText = '20';
+      }
+      if (document.getElementById('statHashlilly')) {
+        document.getElementById('statHashlilly').innerText = (a.byProject && a.byProject['hashlilly']) || 0;
+      }
     }
 
     async function fetchLeads() {
