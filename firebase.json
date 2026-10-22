@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "reddit-lead-sentinel",
+    "target": "reddit-lead-sentinel",
     "public": "public",
     "ignore": [
       "firebase.json",
