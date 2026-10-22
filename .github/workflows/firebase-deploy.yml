@@ -33,16 +33,11 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         run: |
-          firebase deploy --only hosting:reddit-lead-sentinel --project gen-lang-client-0758786889 --non-interactive 2>&1 | tee deploy.log || true
-          echo "### Firebase Deploy Output" >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
-          cat deploy.log >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY
+          firebase deploy --only hosting:reddit-lead-sentinel --project gen-lang-client-0758786889 --non-interactive > deploy.log 2>&1 || true
+          DEPLOY_OUTPUT=$(head -n 30 deploy.log | tr '\n' ' ')
+          echo "::error title=FirebaseDeployLog::$DEPLOY_OUTPUT"
           if grep -q "Deploy complete!" deploy.log; then
-            echo "Successfully deployed!"
             exit 0
           else
-            echo "Deployment encountered an issue:"
-            cat deploy.log
             exit 1
           fi
