@@ -755,14 +755,22 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
     .status-badge-btn.replied {
-      background: rgba(16, 185, 129, 0.15);
-      border-color: #10B981;
-      color: #6EE7B7;
+      background: rgba(16, 185, 129, 0.25) !important;
+      border-color: #10B981 !important;
+      color: #34D399 !important;
+      font-weight: 600 !important;
     }
     .status-badge-btn.bookmarked {
-      background: rgba(245, 158, 11, 0.15);
-      border-color: #F59E0B;
-      color: #FCD34D;
+      background: rgba(245, 158, 11, 0.25) !important;
+      border-color: #F59E0B !important;
+      color: #FCD34D !important;
+      font-weight: 600 !important;
+    }
+    .status-badge-btn.ignored {
+      background: rgba(239, 68, 68, 0.2) !important;
+      border-color: #EF4444 !important;
+      color: #F87171 !important;
+      font-weight: 600 !important;
     }
 
     /* Toast Notification */
@@ -1774,6 +1782,40 @@
       return added;
     }
 
+    let hasLoadedStaticLeads = false;
+
+    function mergeStaticLeads(incomingLeads) {
+      const current = getStoredLeads();
+      const currentMap = new Map();
+      current.forEach(l => {
+        if (l.id) currentMap.set(l.id, l);
+        if (l.redditPostId) currentMap.set(l.redditPostId, l);
+      });
+
+      const merged = incomingLeads.map(item => {
+        const existing = currentMap.get(item.id) || currentMap.get(item.redditPostId);
+        if (existing) {
+          // Strictly preserve user modifications (status, repliedAt, notes)
+          return {
+            ...item,
+            status: existing.status || item.status || 'new',
+            repliedAt: existing.repliedAt || item.repliedAt
+          };
+        }
+        return item;
+      });
+
+      // Preserve any local leads not in incoming
+      current.forEach(l => {
+        if (!merged.some(m => m.id === l.id || (m.redditPostId && m.redditPostId === l.redditPostId))) {
+          merged.push(l);
+        }
+      });
+
+      saveStoredLeads(merged);
+      return merged;
+    }
+
     async function fetchStats() {
       try {
         const res = await fetch('/api/stats');
@@ -1786,26 +1828,24 @@
           }
         }
       } catch (err) {
-        // Backend offline, fallback to static / leads.json
+        // Backend offline, expected on static Firebase Hosting
       }
 
-      // If static leads available, load them
-      try {
-        const staticRes = await fetch('/leads.json');
-        if (staticRes.ok) {
-          const staticLeads = await staticRes.json();
-          if (Array.isArray(staticLeads) && staticLeads.length > 0) {
-            saveStoredLeads(staticLeads);
-          }
-        }
-      } catch (e) {}
+      renderStatsFromLocal();
+    }
 
+    function renderStatsFromLocal() {
       const leads = getStoredLeads();
       const total = leads.length;
       const high = leads.filter(l => l.leadScore >= 80).length;
       const replied = leads.filter(l => l.status === 'replied').length;
       const hl = leads.filter(l => l.matchedProjectId === 'hashlilly').length;
-      updateStatsUI({ totalLeads: total, highIntentLeads: high, repliedLeads: replied, byProject: { hashlilly: hl } });
+      updateStatsUI({
+        totalLeads: total,
+        highIntentLeads: high,
+        repliedLeads: replied,
+        byProject: { hashlilly: hl }
+      });
     }
 
     function updateStatsUI(a) {
@@ -1845,37 +1885,65 @@
       }
 
       if (!fetchedFromApi) {
-        // Static hosting fallback (Firebase Hosting)
-        try {
-          const staticRes = await fetch('/leads.json');
-          if (staticRes.ok) {
-            const staticLeads = await staticRes.json();
-            if (Array.isArray(staticLeads) && staticLeads.length > 0) {
-              saveStoredLeads(staticLeads);
+        // Only load /leads.json on initial load so user status changes are never overwritten
+        if (!hasLoadedStaticLeads) {
+          try {
+            const staticRes = await fetch('/leads.json');
+            if (staticRes.ok) {
+              const staticLeads = await staticRes.json();
+              if (Array.isArray(staticLeads) && staticLeads.length > 0) {
+                mergeStaticLeads(staticLeads);
+                hasLoadedStaticLeads = true;
+              }
             }
+          } catch (staticErr) {
+            console.warn('Could not fetch static /leads.json:', staticErr);
           }
-        } catch (staticErr) {
-          console.warn('Could not fetch static /leads.json:', staticErr);
         }
 
-        const allStored = getStoredLeads();
-        leadsData = allStored.filter(l => {
-          if (currentProject !== 'all' && l.matchedProjectId !== currentProject) return false;
-          if (currentStatus !== 'all' && l.status !== currentStatus) return false;
-          if (currentScore && l.leadScore < currentScore) return false;
-          if (searchQuery) {
-            const q = searchQuery.toLowerCase();
-            return (
-              (l.title && l.title.toLowerCase().includes(q)) ||
-              (l.selftext && l.selftext.toLowerCase().includes(q)) ||
-              (l.userPainPoint && l.userPainPoint.toLowerCase().includes(q)) ||
-              (l.author && l.author.toLowerCase().includes(q)) ||
-              (l.subreddit && l.subreddit.toLowerCase().includes(q))
-            );
-          }
-          return true;
-        });
+        renderLeadsFromLocal();
+        return;
       }
+
+      countDisplay.innerText = 'Showing ' + leadsData.length + ' leads';
+
+      if (leadsData.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <h3>No leads found matching criteria</h3>
+            <p>Try lowering the score filter or click "Run Instant Scan" to harvest fresh Reddit threads.</p>
+            <button class="btn btn-primary" onclick="document.getElementById('btnRunScan').click()" style="margin-top: 16px;">
+              ⚡ Scan Now
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = leadsData.map(renderLeadCard).join('');
+    }
+
+    function renderLeadsFromLocal() {
+      const container = document.getElementById('leadsContainer');
+      const countDisplay = document.getElementById('leadCountDisplay');
+
+      const allStored = getStoredLeads();
+      leadsData = allStored.filter(l => {
+        if (currentProject !== 'all' && l.matchedProjectId !== currentProject) return false;
+        if (currentStatus !== 'all' && l.status !== currentStatus) return false;
+        if (currentScore && l.leadScore < currentScore) return false;
+        if (searchQuery) {
+          const q = searchQuery.toLowerCase();
+          return (
+            (l.title && l.title.toLowerCase().includes(q)) ||
+            (l.selftext && l.selftext.toLowerCase().includes(q)) ||
+            (l.userPainPoint && l.userPainPoint.toLowerCase().includes(q)) ||
+            (l.author && l.author.toLowerCase().includes(q)) ||
+            (l.subreddit && l.subreddit.toLowerCase().includes(q))
+          );
+        }
+        return true;
+      });
 
       countDisplay.innerText = 'Showing ' + leadsData.length + ' leads';
 
@@ -1960,15 +2028,15 @@
               </a>
             </div>
 
-            <div class="action-group-right">
+            <div class="action-group-right" id="status_group_${lead.id}">
               <button class="status-badge-btn ${lead.status === 'replied' ? 'replied' : ''}" onclick="updateStatus('${lead.id}', 'replied')">
                 ${lead.status === 'replied' ? '✅ Replied' : 'Mark Replied'}
               </button>
               <button class="status-badge-btn ${lead.status === 'bookmarked' ? 'bookmarked' : ''}" onclick="updateStatus('${lead.id}', 'bookmarked')">
-                📌 Bookmark
+                ${lead.status === 'bookmarked' ? '📌 Bookmarked' : '📌 Bookmark'}
               </button>
-              <button class="status-badge-btn" onclick="updateStatus('${lead.id}', 'ignored')">
-                ❌ Dismiss
+              <button class="status-badge-btn ${lead.status === 'ignored' ? 'ignored' : ''}" onclick="updateStatus('${lead.id}', 'ignored')">
+                ${lead.status === 'ignored' ? '❌ Dismissed' : '❌ Dismiss'}
               </button>
             </div>
           </div>
@@ -1998,29 +2066,69 @@
       }
     }
 
-    async function updateStatus(leadId, status) {
-      // Local storage persistence
+    function renderStatusGroup(leadId, status) {
+      const el = document.getElementById('status_group_' + leadId);
+      if (!el) return;
+      el.innerHTML = `
+        <button class="status-badge-btn ${status === 'replied' ? 'replied' : ''}" onclick="updateStatus('${leadId}', 'replied')">
+          ${status === 'replied' ? '✅ Replied' : 'Mark Replied'}
+        </button>
+        <button class="status-badge-btn ${status === 'bookmarked' ? 'bookmarked' : ''}" onclick="updateStatus('${leadId}', 'bookmarked')">
+          ${status === 'bookmarked' ? '📌 Bookmarked' : '📌 Bookmark'}
+        </button>
+        <button class="status-badge-btn ${status === 'ignored' ? 'ignored' : ''}" onclick="updateStatus('${leadId}', 'ignored')">
+          ${status === 'ignored' ? '❌ Dismissed' : '❌ Dismiss'}
+        </button>
+      `;
+    }
+
+    async function updateStatus(leadId, targetStatus) {
       const leads = getStoredLeads();
-      const idx = leads.findIndex(l => l.id === leadId);
-      if (idx !== -1) {
-        leads[idx].status = status;
-        if (status === 'replied') leads[idx].repliedAt = new Date().toISOString();
-        saveStoredLeads(leads);
+      const idx = leads.findIndex(l => l.id === leadId || l.redditPostId === leadId);
+      if (idx === -1) {
+        console.warn('Lead not found for status update:', leadId);
+        return;
       }
 
-      // Backend API call if available
+      const current = leads[idx].status || 'new';
+      // Toggle logic: clicking 'replied' when already 'replied' reverts to 'new'
+      const newStatus = (current === targetStatus) ? 'new' : targetStatus;
+      leads[idx].status = newStatus;
+
+      if (newStatus === 'replied') {
+        leads[idx].repliedAt = new Date().toISOString();
+        showToast('✅ Marked as Replied!');
+      } else if (newStatus === 'bookmarked') {
+        showToast('📌 Lead bookmarked!');
+      } else if (newStatus === 'ignored') {
+        showToast('❌ Lead dismissed.');
+      } else {
+        showToast('↩️ Status reset to New');
+      }
+
+      saveStoredLeads(leads);
+
+      // Instantly update the button group in DOM
+      renderStatusGroup(leadId, newStatus);
+
+      // If user is currently filtering by a specific status, re-filter so the list reflects current filter
+      if (currentStatus !== 'all') {
+        renderLeadsFromLocal();
+      }
+
+      // Update counters in stats cards immediately
+      renderStatsFromLocal();
+
+      // Backend API call if server is running
       try {
         await fetch('/api/leads/' + leadId, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ status })
+          body: JSON.stringify({ status: newStatus })
         });
       } catch (err) {
-        // Ignore offline backend
+        // Offline backend is normal on static hosting
       }
-
-      fetchStats();
-      fetchLeads();
     }
 
     function switchTone(e, leadId, toneType) {
