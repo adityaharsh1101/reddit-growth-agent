@@ -72,6 +72,11 @@ export class LeadStorage {
       if (lead.id === 'lead_hl_resumes_001' || lead.id === 'lead_hl_jobs_002' || lead.redditPostId === '1g9x4q2' || lead.redditPostId === '1ga2m8k') {
         continue;
       }
+      if (lead.draftReply) lead.draftReply = lead.draftReply.replace(/\*/g, '').trim();
+      if (lead.alternativeReplies) {
+        if (lead.alternativeReplies.founderCasual) lead.alternativeReplies.founderCasual = lead.alternativeReplies.founderCasual.replace(/\*/g, '').trim();
+        if (lead.alternativeReplies.actionableChecklist) lead.alternativeReplies.actionableChecklist = lead.alternativeReplies.actionableChecklist.replace(/\*/g, '').trim();
+      }
       if (!existingMap.has(lead.redditPostId)) {
         existingMap.set(lead.redditPostId, lead);
         addedCount++;

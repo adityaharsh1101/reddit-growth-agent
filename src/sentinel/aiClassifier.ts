@@ -104,10 +104,10 @@ export class AIClassifier {
         userPainPoint: parsed.userPainPoint || 'Looking for solutions in this domain.',
         recommendedAction: parsed.recommendedAction || 'Reply to Thread',
 
-        draftReply: parsed.draftReply || this.generateDefaultDraft(post, project),
-        alternativeReplies: parsed.alternativeReplies || {
-          founderCasual: `Hey u/${post.author}, I built ${project.name} to solve this exact issue. Happy to share some tips!`,
-          actionableChecklist: `1. Check your structure\n2. Mirror the target requirements\n3. Use ${project.name} for automated testing.`
+        draftReply: this.cleanRedditText(parsed.draftReply || this.generateDefaultDraft(post, project)),
+        alternativeReplies: {
+          founderCasual: this.cleanRedditText(parsed.alternativeReplies?.founderCasual || `Hey u/${post.author}, I built ${project.name} to solve this exact issue. Happy to share some tips!`),
+          actionableChecklist: this.cleanRedditText(parsed.alternativeReplies?.actionableChecklist || `1. Check your structure\n2. Mirror the target requirements\n3. Use ${project.name} for automated testing.`)
         },
         keyTopics: parsed.keyTopics || [project.focusArea],
 
@@ -176,10 +176,10 @@ Output strictly valid JSON with this exact schema:
   "urgency": "Low" | "Medium" | "High" | "Critical",
   "userPainPoint": "1-2 sentence crisp breakdown of what OP is struggling with",
   "recommendedAction": "Reply to Thread" | "DM User" | "Monitor",
-  "draftReply": "The complete, ready-to-post, highly engaging markdown Reddit reply. Include empathy, 2-3 specific technical or practical tips, and a natural suggestion to test/use ${project.name}.",
+  "draftReply": "The complete, ready-to-post, highly engaging Reddit reply. DO NOT use markdown bold/italic asterisks (** or *) because Reddit's comment editor renders them as literal asterisks. Use plain text numbers and capitalization for emphasis. Include empathy, 2-3 specific technical or practical tips, and a natural suggestion to test/use ${project.name}.",
   "alternativeReplies": {
-    "founderCasual": "A shorter, authentic founder perspective reply",
-    "actionableChecklist": "A quick 3-bullet-point tactical checklist reply"
+    "founderCasual": "A shorter, authentic founder perspective reply without asterisks",
+    "actionableChecklist": "A quick 3-bullet-point tactical checklist reply without asterisks"
   },
   "keyTopics": ["string", "string"]
 }`;
@@ -348,26 +348,31 @@ Output strictly valid JSON with this exact schema:
     };
   }
 
+  private cleanRedditText(text: string): string {
+    if (!text) return '';
+    return text.replace(/\*/g, '').trim();
+  }
+
   private generateDefaultDraft(post: RawRedditPost, project: ProjectConfig): string {
     if (project.id === 'hashlilly') {
       return `Hey u/${post.author}, I completely understand the frustration. The current job market is rough, and the reality is that ~70-75% of resumes get filtered out by ATS screeners (like Workday, Taleo, Greenhouse) before any recruiter sees them.
 
 Here are 3 concrete things you can fix right now:
-1. **Ditch Multi-Column & Graphic Templates**: ATS parsers read left-to-right, top-to-bottom. Columns or tables often cause text blocks to scramble into nonsense. Stick to a clean, single-column layout.
-2. **Use the X-Y-Z Impact Formula**: Instead of listing daily duties, write bullet points like *"Accomplished [X] as measured by [Y] by doing [Z]"* with real metrics.
-3. **Mirror the Job Description Keywords**: Make sure hard skills and specific tools from the job post appear naturally in your skills section and bullet points.
+1. Ditch Multi-Column & Graphic Templates: ATS parsers read left-to-right, top-to-bottom. Columns or tables often cause text blocks to scramble into nonsense. Stick to a clean, single-column layout.
+2. Use the X-Y-Z Impact Formula: Instead of listing daily duties, write bullet points like "Accomplished [X] as measured by [Y] by doing [Z]" with real metrics.
+3. Mirror the Job Description Keywords: Make sure hard skills and specific tools from the job post appear naturally in your skills section and bullet points.
 
-If you want to test how an ATS actually parses your resume and see missing keywords against the job description, you can run a free audit on **Hashlilly Resume Engine** (${project.websiteUrl}).
+If you want to test how an ATS actually parses your resume and see missing keywords against the job description, you can run a free audit on Hashlilly Resume Engine (${project.websiteUrl}).
 
 Rooting for you—don't give up!`;
     }
 
-    return `Hey u/${post.author}, ${project.replyStrategy.sampleOpening}
+    return `Hey u/${post.author}, ${project.replyStrategy.sampleOpening.replace(/\*/g, '')}
 
 Here are 3 actionable ways to address this:
-1. **Focus on the Core Bottleneck**: Avoid over-complicating workflows before validating the baseline.
-2. **Standardize Your Tooling**: Use dedicated utilities rather than manual workarounds.
-3. **Explore Specialized Solutions**: ${project.replyStrategy.callToAction} (${project.websiteUrl}).
+1. Focus on the Core Bottleneck: Avoid over-complicating workflows before validating the baseline.
+2. Standardize Your Tooling: Use dedicated utilities rather than manual workarounds.
+3. Explore Specialized Solutions: ${project.replyStrategy.callToAction.replace(/\*/g, '')} (${project.websiteUrl}).
 
 Hope this gives clarity and helps you move forward!`;
   }
