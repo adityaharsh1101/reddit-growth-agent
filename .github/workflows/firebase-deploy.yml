@@ -37,4 +37,4 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         if: env.HAVE_FIREBASE_SECRET == 'true'
-        run: firebase deploy --only hosting:reddit-lead-sentinel --project gen-lang-client-0758786889 --non-interactive
+        run: firebase deploy --only hosting --project gen-lang-client-0758786889 --non-interactive
