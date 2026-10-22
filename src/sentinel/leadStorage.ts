@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 
 const DATA_DIR = path.resolve(__dirname, '../../data');
 const LEADS_FILE = path.join(DATA_DIR, 'leads.json');
+const PUBLIC_LEADS_FILE = path.resolve(__dirname, '../../public/leads.json');
 const SEEN_POSTS_FILE = path.join(DATA_DIR, 'seen_posts.json');
 
 import { PROJECTS_CONFIG } from '../config/projects.js';
@@ -33,6 +34,8 @@ export class LeadStorage {
     try {
       const raw = fs.readFileSync(LEADS_FILE, 'utf-8');
       let leads: QualifiedLead[] = JSON.parse(raw);
+      // Filter out legacy mock seeds with synthetic IDs
+      leads = leads.filter(l => l.id !== 'lead_hl_resumes_001' && l.id !== 'lead_hl_jobs_002' && l.redditPostId !== '1g9x4q2' && l.redditPostId !== '1ga2m8k');
 
       if (filter) {
         if (filter.projectId && filter.projectId !== 'all') {
@@ -66,6 +69,9 @@ export class LeadStorage {
 
     let addedCount = 0;
     for (const lead of newLeads) {
+      if (lead.id === 'lead_hl_resumes_001' || lead.id === 'lead_hl_jobs_002' || lead.redditPostId === '1g9x4q2' || lead.redditPostId === '1ga2m8k') {
+        continue;
+      }
       if (!existingMap.has(lead.redditPostId)) {
         existingMap.set(lead.redditPostId, lead);
         addedCount++;
@@ -74,6 +80,11 @@ export class LeadStorage {
 
     const updated = Array.from(existingMap.values());
     fs.writeFileSync(LEADS_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(PUBLIC_LEADS_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+    } catch (e) {
+      // Ignore if public not present
+    }
     this.markPostsAsSeen(newLeads.map(l => l.redditPostId));
 
     return addedCount;
@@ -90,6 +101,11 @@ export class LeadStorage {
     }
 
     fs.writeFileSync(LEADS_FILE, JSON.stringify(leads, null, 2), 'utf-8');
+    try {
+      fs.writeFileSync(PUBLIC_LEADS_FILE, JSON.stringify(leads, null, 2), 'utf-8');
+    } catch (e) {
+      // Ignore if public not present
+    }
     return true;
   }
 

@@ -6,7 +6,7 @@
   "main": "dist/server/index.js",
   "scripts": {
     "dev": "tsx watch src/server/index.ts",
-    "build": "tsc",
+    "build": "tsc && node -e \"const fs=require('fs'); if(fs.existsSync('data/leads.json')) fs.copyFileSync('data/leads.json', 'public/leads.json'); console.log('Synced data/leads.json to public/leads.json');\"",
     "start": "node dist/server/index.js",
     "scan": "tsx src/sentinel/cli.ts --scan",
     "scan:hashlilly": "tsx src/sentinel/cli.ts --project hashlilly",
